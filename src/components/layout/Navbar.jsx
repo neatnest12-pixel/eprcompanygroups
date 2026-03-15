@@ -1,25 +1,13 @@
-import {
-  ChevronDown,
-  Heart,
-  LogOut,
-  Menu,
-  PhoneCall,
-  Shield,
-  User,
-  X
-} from "lucide-react";
-import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import LoginModal, { getEmptyAuthState } from "../auth/LoginModal";
 import { useIsMobile } from "../../hooks/use-mobile";
 import { useAuth } from "../../lib/AuthContext";
-import Button from "../ui/Button";
 
 function navLinkClass({ isActive }) {
-  return `relative inline-flex h-16 items-center text-sm font-semibold transition-colors after:absolute after:bottom-4 after:left-0 after:h-0.5 after:w-full after:origin-left after:rounded-full after:bg-orange-500 after:transition-transform after:duration-300 ${
-    isActive
-      ? "text-slate-900 after:scale-x-100"
-      : "text-slate-600 after:scale-x-0 hover:text-slate-900 hover:after:scale-x-100"
+  return `text-sm font-medium ${
+    isActive ? "text-orange-500" : "text-gray-700 hover:text-orange-500"
   }`;
 }
 
@@ -27,9 +15,7 @@ export default function Navbar() {
   const { user, login, register, logout } = useAuth();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
-  const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [mode, setMode] = useState("login");
   const [formState, setFormState] = useState(getEmptyAuthState());
@@ -75,7 +61,6 @@ export default function Navbar() {
 
       setModalOpen(false);
       setMenuOpen(false);
-      setProfileOpen(false);
       navigate(authenticatedUser.role === "admin" ? "/admin" : "/properties");
     } catch (submitError) {
       setError(submitError.message);
@@ -83,137 +68,84 @@ export default function Navbar() {
   };
 
   const handleLogout = () => {
-    setProfileOpen(false);
     setMenuOpen(false);
     logout();
     navigate("/");
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 8);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <>
-      <header
-        className={`sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur ${
-          isScrolled ? "shadow-md" : "shadow-sm"
-        }`}
-      >
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-6 lg:px-8">
-          <Link to="/" className="flex items-center gap-3">
+      <header className="sticky top-0 z-50 w-full bg-white shadow-sm">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+          <Link to="/" className="flex items-center gap-2">
             <img
-              src="/src/assets/logo.png"
+              src="/logo.png"
               alt="ERP Group Company"
-              className="h-8 w-auto object-contain sm:h-10"
+              className="h-10 w-auto"
             />
-            <div className="flex flex-col leading-tight">
-              <span className="text-lg font-semibold text-slate-900">
+            <div className="leading-tight">
+              <p className="text-sm font-semibold text-slate-900 md:text-lg">
                 ERP Group Company
-              </span>
-              <span className="text-xs tracking-widest text-gray-500">
-                RICH MAN MAKER
-              </span>
+              </p>
+              <p className="text-xs text-gray-500">Richman Maker</p>
             </div>
           </Link>
 
-          <div className="hidden items-center gap-6 md:flex">
-            <nav className="flex items-center gap-6">
-              {navItems.map((item) => (
-                <NavLink key={item.to} to={item.to} className={navLinkClass}>
-                  {item.label}
-                </NavLink>
-              ))}
-            </nav>
-            <a
-              href="tel:7299007799"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 transition hover:text-slate-900"
-            >
-              <PhoneCall className="h-4 w-4" />
-              7299007799
-            </a>
+          <nav className="hidden flex-1 items-center justify-center gap-8 text-gray-700 md:flex">
+            {navItems.map((item) => (
+              <NavLink key={item.to} to={item.to} className={navLinkClass}>
+                {item.label}
+              </NavLink>
+            ))}
+          </nav>
 
-            {user ? (
-              <>
-                <Link
-                  to="/favorites"
-                  className="rounded-lg border border-slate-200 p-2.5 text-slate-600 transition-all duration-300 hover:-translate-y-1 hover:bg-gray-50 hover:text-slate-900"
-                  aria-label="Favorites"
-                >
-                  <Heart className="h-4 w-4" />
-                </Link>
-                <div className="relative">
+          <div className="flex items-center gap-4">
+            <div className="hidden items-center gap-5 md:flex">
+              <span className="text-sm font-medium text-gray-700">7299007799</span>
+              {user ? (
+                <>
+                  <span className="text-sm text-gray-700">{user.name}</span>
                   <button
                     type="button"
-                    onClick={() => setProfileOpen((current) => !current)}
-                    className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:bg-gray-50"
+                    onClick={handleLogout}
+                    className="text-sm font-medium text-gray-700 hover:text-orange-500"
                   >
-                    {user.role === "admin" ? (
-                      <Shield className="h-4 w-4" />
-                    ) : (
-                      <User className="h-4 w-4" />
-                    )}
-                    {user.name}
-                    <ChevronDown className="h-4 w-4" />
+                    Logout
                   </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => openAuthModal("login")}
+                    className="text-sm font-medium text-gray-700 hover:text-orange-500"
+                  >
+                    Login
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => openAuthModal("register")}
+                    className="rounded-lg bg-orange-500 px-4 py-2 text-sm font-medium text-white"
+                  >
+                    Signup
+                  </button>
+                </>
+              )}
+            </div>
 
-                  {profileOpen ? (
-                    <div className="absolute right-0 top-[calc(100%+0.75rem)] w-56 rounded-xl border border-slate-200 bg-white p-3 shadow-lg">
-                      <div className="rounded-lg bg-slate-50 px-4 py-3">
-                        <p className="text-sm font-semibold text-slate-900">Profile</p>
-                        <p className="mt-1 text-xs text-gray-500">{user.email}</p>
-                      </div>
-                      <div className="mt-3 flex flex-col gap-2">
-                        {user.role === "admin" ? (
-                          <Link
-                            to="/admin"
-                            onClick={() => setProfileOpen(false)}
-                            className="rounded-lg px-4 py-3 text-sm font-semibold text-slate-900 transition-all duration-300 hover:bg-gray-50"
-                          >
-                            Admin Dashboard
-                          </Link>
-                        ) : null}
-                        <button
-                          type="button"
-                          onClick={handleLogout}
-                          className="inline-flex items-center gap-2 rounded-lg px-4 py-3 text-left text-sm font-semibold text-slate-900 transition-all duration-300 hover:bg-gray-50"
-                        >
-                          <LogOut className="h-4 w-4" />
-                          Logout
-                        </button>
-                      </div>
-                    </div>
-                  ) : null}
-                </div>
-              </>
-            ) : (
-              <>
-                <Button variant="ghost" onClick={() => openAuthModal("login")}>
-                  Login
-                </Button>
-                <Button onClick={() => openAuthModal("register")}>Signup</Button>
-              </>
-            )}
+            <button
+              type="button"
+              onClick={() => setMenuOpen((current) => !current)}
+              className="rounded-lg border border-gray-200 p-2 text-gray-700 md:hidden"
+              aria-label="Toggle navigation"
+            >
+              {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
-
-          <button
-            type="button"
-            onClick={() => setMenuOpen((current) => !current)}
-            className="justify-self-end rounded-lg border border-slate-200 p-2.5 text-slate-900 md:hidden"
-            aria-label="Toggle navigation"
-          >
-            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
         </div>
 
         {menuOpen && isMobile ? (
-          <div className="container-shell border-t border-slate-200 pb-6 pt-4 md:hidden">
+          <div className="mx-auto max-w-7xl border-t border-gray-200 px-6 pb-6 pt-4 md:hidden">
             <nav className="flex flex-col gap-4">
               {navItems.map((item) => (
                 <NavLink
@@ -227,43 +159,35 @@ export default function Navbar() {
               ))}
             </nav>
 
-            <div className="mt-6 flex flex-col gap-3">
-              <a
-                href="tel:8939427799"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600"
-              >
-                <PhoneCall className="h-4 w-4" />
-                8939427799
-              </a>
+            <div className="mt-6 flex flex-col gap-3 text-sm text-gray-700">
+              <span className="font-medium">7299007799</span>
               {user ? (
                 <>
-                  <p className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900">
-                    {user.role === "admin" ? (
-                      <Shield className="h-4 w-4" />
-                    ) : (
-                      <User className="h-4 w-4" />
-                    )}
-                    {user.name}
-                  </p>
-                  {user.role === "admin" ? (
-                    <NavLink
-                      to="/admin"
-                      className="text-sm font-semibold text-slate-600 transition hover:text-slate-900"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      Admin Dashboard
-                    </NavLink>
-                  ) : null}
-                  <Button variant="outline" onClick={handleLogout}>
+                  <span className="font-medium text-gray-900">{user.name}</span>
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="text-left font-medium text-gray-700 hover:text-orange-500"
+                  >
                     Logout
-                  </Button>
+                  </button>
                 </>
               ) : (
                 <>
-                  <Button variant="outline" onClick={() => openAuthModal("login")}>
+                  <button
+                    type="button"
+                    onClick={() => openAuthModal("login")}
+                    className="text-left font-medium text-gray-700 hover:text-orange-500"
+                  >
                     Login
-                  </Button>
-                  <Button onClick={() => openAuthModal("register")}>Signup</Button>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => openAuthModal("register")}
+                    className="w-full rounded-lg bg-orange-500 px-4 py-2 font-medium text-white"
+                  >
+                    Signup
+                  </button>
                 </>
               )}
             </div>

@@ -1,28 +1,31 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { seedDatabase } from "./data/storage";
 import { AuthProvider } from "./lib/AuthContext";
 import PageNotFound from "./lib/PageNotFound";
-import Home from "./pages/Home";
-import Properties from "./pages/Properties";
-import PropertyDetail from "./pages/PropertyDetail";
-import Favorites from "./pages/Favorites";
-import AddProperty from "./pages/AddProperty";
-import AdminDashboard from "./pages/AdminDashboard";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Services from "./pages/Services";
-import MapSearch from "./pages/MapSearch";
-import Compare from "./pages/Compare";
-import AgentProfile from "./pages/AgentProfile";
-import AdminLeads from "./pages/AdminLeads";
-import SeoLocationPage from "./pages/SeoLocationPage";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import FloatingWhatsApp from "./components/layout/FloatingWhatsApp";
+import LoadingSpinner from "./components/ui/LoadingSpinner";
 import { useAuth } from "./lib/AuthContext";
 
 seedDatabase();
+
+const Home = lazy(() => import("./pages/Home"));
+const Properties = lazy(() => import("./pages/Properties"));
+const PropertyDetail = lazy(() => import("./pages/PropertyDetail"));
+const Favorites = lazy(() => import("./pages/Favorites"));
+const AddProperty = lazy(() => import("./pages/AddProperty"));
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Services = lazy(() => import("./pages/Services"));
+const MapSearch = lazy(() => import("./pages/MapSearch"));
+const Compare = lazy(() => import("./pages/Compare"));
+const AgentProfile = lazy(() => import("./pages/AgentProfile"));
+const AdminLeads = lazy(() => import("./pages/AdminLeads"));
+const SeoLocationPage = lazy(() => import("./pages/SeoLocationPage"));
 
 function AdminRoute({ children }) {
   const { isReady, user } = useAuth();
@@ -63,52 +66,60 @@ function AppShell() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
           >
-            <Routes location={location}>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/properties" element={<Properties />} />
-              <Route path="/properties/:id" element={<PropertyDetail />} />
-              <Route path="/favorites" element={<Favorites />} />
-              <Route path="/map-search" element={<MapSearch />} />
-              <Route path="/compare" element={<Compare />} />
-              <Route path="/agent/epr-groups" element={<AgentProfile />} />
-              <Route
-                path="/add-property"
-                element={
-                  <AdminRoute>
-                    <AddProperty />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path="/admin/add-property"
-                element={
-                  <AdminRoute>
-                    <AddProperty />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path="/admin"
-                element={
-                  <AdminRoute>
-                    <AdminDashboard />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path="/admin/leads"
-                element={
-                  <AdminRoute>
-                    <AdminLeads />
-                  </AdminRoute>
-                }
-              />
-              <Route path="/:seoSlug" element={<SeoLocationPage />} />
-              <Route path="*" element={<PageNotFound />} />
-            </Routes>
+            <Suspense
+              fallback={
+                <div className="container-shell py-16">
+                  <LoadingSpinner label="Loading page..." />
+                </div>
+              }
+            >
+              <Routes location={location}>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/properties" element={<Properties />} />
+                <Route path="/properties/:id" element={<PropertyDetail />} />
+                <Route path="/favorites" element={<Favorites />} />
+                <Route path="/map-search" element={<MapSearch />} />
+                <Route path="/compare" element={<Compare />} />
+                <Route path="/agent/epr-groups" element={<AgentProfile />} />
+                <Route
+                  path="/add-property"
+                  element={
+                    <AdminRoute>
+                      <AddProperty />
+                    </AdminRoute>
+                  }
+                />
+                <Route
+                  path="/admin/add-property"
+                  element={
+                    <AdminRoute>
+                      <AddProperty />
+                    </AdminRoute>
+                  }
+                />
+                <Route
+                  path="/admin"
+                  element={
+                    <AdminRoute>
+                      <AdminDashboard />
+                    </AdminRoute>
+                  }
+                />
+                <Route
+                  path="/admin/leads"
+                  element={
+                    <AdminRoute>
+                      <AdminLeads />
+                    </AdminRoute>
+                  }
+                />
+                <Route path="/:seoSlug" element={<SeoLocationPage />} />
+                <Route path="*" element={<PageNotFound />} />
+              </Routes>
+            </Suspense>
           </motion.div>
         </AnimatePresence>
       </main>

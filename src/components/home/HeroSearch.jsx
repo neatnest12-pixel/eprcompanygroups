@@ -62,7 +62,7 @@ export default function HeroSearch() {
             className="max-w-2xl text-base text-slate-200 leading-relaxed sm:text-lg"
             variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }}
           >
-            ERP Group Company – Rich Man Maker
+            ERP Group Company - Richman Maker
           </motion.p>
           <motion.p
             className="max-w-2xl text-base text-slate-200 leading-relaxed sm:text-lg"
@@ -91,7 +91,7 @@ export default function HeroSearch() {
           >
             <div className="mb-4 flex items-center gap-3">
               <div className="rounded-lg bg-orange-50 p-3 text-orange-500">
-              <Search className="h-5 w-5" />
+                <Search className="h-5 w-5" />
               </div>
               <div>
                 <p className="text-sm font-bold uppercase tracking-[0.3em] text-orange-500">
@@ -103,7 +103,10 @@ export default function HeroSearch() {
               </div>
             </div>
 
-            <form className="grid grid-cols-1 gap-4 md:grid-cols-4" onSubmit={handleSearch}>
+            <form
+              className="grid grid-cols-1 gap-3 md:grid-cols-4"
+              onSubmit={handleSearch}
+            >
               <Input
                 placeholder="Keywords, landmark, or property type"
                 value={filters.keywords}

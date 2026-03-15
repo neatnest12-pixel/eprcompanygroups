@@ -9,7 +9,13 @@ import Button from "../ui/Button";
 import Input from "../ui/Input";
 import Select from "../ui/Select";
 
-export default function PropertyFilters({ filters, onChange, onReset, locations = [] }) {
+export default function PropertyFilters({
+  filters,
+  onChange,
+  onReset,
+  locations = [],
+  className = ""
+}) {
   const update = (key, value) => onChange({ ...filters, [key]: value });
   const updateAmenity = (amenity) => {
     const nextAmenities = filters.amenities.includes(amenity)
@@ -19,7 +25,7 @@ export default function PropertyFilters({ filters, onChange, onReset, locations 
   };
 
   return (
-    <aside className="glass-panel h-fit w-full rounded-xl p-6">
+    <aside className={`glass-panel h-fit w-full rounded-xl p-6 ${className}`}>
       <div className="mb-6 flex items-center gap-3">
         <div className="rounded-lg bg-orange-50 p-3 text-orange-500">
           <SlidersHorizontal className="h-5 w-5" />

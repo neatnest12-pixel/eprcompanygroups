@@ -100,19 +100,38 @@ export default function PropertyDetail() {
     );
   }
 
-  const whatsappLink = buildWhatsAppLink(
-    "Hello, I am interested in this property listed on ERP Group Company website."
-  );
   const shareUrl = typeof window !== "undefined" ? window.location.href : "";
   const shareText = `Hello, I am interested in this property listed on ERP Group Company website. ${shareUrl}`;
   const videoUrl = property.videoUrl?.trim();
   const videoEmbedUrl = getVideoEmbedUrl(videoUrl);
   const statusLabels = getPropertyStatusLabels(property);
   const isCompared = compareIds.includes(property.id);
+  const priceText = property.priceLabel || formatCurrency(property.price);
+  const sizeText = property.size || (property.area ? `${property.area} sqft` : "");
 
   const copyLink = async () => {
     await navigator.clipboard.writeText(shareUrl);
     setShareMessage("Property link copied to clipboard.");
+  };
+
+  const handleWhatsAppEnquiry = () => {
+    const message = `
+Hello ERP Group Company,
+
+I am interested in this property.
+
+Property: ${property.title}
+Location: ${property.location}
+Price: ${priceText}
+Size: ${sizeText}
+
+Please share more details.
+`;
+
+    const whatsappUrl = `https://wa.me/918939427799?text=${encodeURIComponent(
+      message
+    )}`;
+    window.open(whatsappUrl, "_blank");
   };
 
   return (
@@ -299,12 +318,13 @@ export default function PropertyDetail() {
                 {isCompared ? "Added to Compare" : "Compare Property"}
               </Button>
               <Button onClick={() => setDialogOpen(true)}>Send enquiry</Button>
-              <a href={whatsappLink} target="_blank" rel="noreferrer">
-                <Button variant="outline" className="w-full">
-                  <MessageCircle className="h-4 w-4" />
-                  Contact on WhatsApp
-                </Button>
-              </a>
+              <button
+                type="button"
+                onClick={handleWhatsAppEnquiry}
+                className="w-full rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600"
+              >
+                WhatsApp Enquiry
+              </button>
             </div>
           </div>
 
@@ -357,7 +377,7 @@ export default function PropertyDetail() {
 
       <div className="mt-16">
         <h2 className="text-3xl font-semibold text-slate-900">Related properties</h2>
-        <div className="mt-8 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {related.map((item) => (
             <PropertyCard key={item.id} property={item} />
           ))}

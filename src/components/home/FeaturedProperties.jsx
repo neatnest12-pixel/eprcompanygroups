@@ -26,7 +26,7 @@ export default function FeaturedProperties({ properties = [], loading = false })
 
   return (
     <motion.section
-      className="mx-auto max-w-7xl px-6 py-16 transition-opacity duration-500"
+      className="container-shell section-shell transition-opacity duration-500"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
@@ -46,9 +46,9 @@ export default function FeaturedProperties({ properties = [], loading = false })
         </Link>
       </div>
 
-      <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {loading ? (
-          <div className="md:col-span-2 lg:col-span-3 xl:col-span-4">
+          <div className="sm:col-span-2 lg:col-span-3">
             <LoadingSpinner label="Loading featured properties..." />
           </div>
         ) : featuredProperties.length ? (

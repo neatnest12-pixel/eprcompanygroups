@@ -114,6 +114,7 @@ export default function MapSearch() {
                 <img
                   src={selectedProperty.images[0]}
                   alt={selectedProperty.title}
+                  loading="lazy"
                   className="h-52 w-full rounded-xl object-cover"
                 />
                 <div>

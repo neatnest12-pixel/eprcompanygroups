@@ -1,3 +1,4 @@
+import { SlidersHorizontal, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { getProperties } from "../api";
@@ -29,6 +30,7 @@ export default function Properties() {
   const [searchParams] = useSearchParams();
   const searchKey = searchParams.toString();
   const [filters, setFilters] = useState(defaultFilters);
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const { compareIds } = useCompare();
@@ -66,7 +68,7 @@ export default function Properties() {
       />
 
       <div className="mt-10 grid grid-cols-12 gap-8">
-        <div className="col-span-12 w-full max-w-[320px] space-y-4 self-start lg:sticky lg:top-20 lg:col-span-3">
+        <div className="col-span-12 hidden w-full max-w-[320px] space-y-4 self-start lg:sticky lg:top-20 lg:col-span-3 lg:block">
           <PropertyFilters
             filters={filters}
             onChange={setFilters}
@@ -82,6 +84,14 @@ export default function Properties() {
               {filteredProperties.length} properties found
             </p>
             <div className="flex flex-wrap gap-3">
+              <button
+                type="button"
+                onClick={() => setFiltersOpen(true)}
+                className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-gray-50 md:hidden"
+              >
+                <SlidersHorizontal className="h-4 w-4" />
+                Filters
+              </button>
               <Link
                 to="/map-search"
                 className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-gray-50"
@@ -100,7 +110,7 @@ export default function Properties() {
           {loading ? (
             <LoadingSpinner label="Loading properties..." />
           ) : filteredProperties.length ? (
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {filteredProperties.map((property) => (
                 <PropertyCard key={property.id} property={property} />
               ))}
@@ -114,8 +124,39 @@ export default function Properties() {
             />
           )}
         </div>
-
       </div>
+
+      {filtersOpen ? (
+        <div className="fixed inset-0 z-50 flex lg:hidden">
+          <button
+            type="button"
+            className="absolute inset-0 bg-black/40"
+            onClick={() => setFiltersOpen(false)}
+            aria-label="Close filters"
+          />
+          <div className="relative h-full w-[85%] max-w-sm overflow-y-auto bg-white px-6 pb-6 pt-6 shadow-xl">
+            <div className="mb-4 flex items-center justify-between">
+              <p className="text-lg font-semibold text-slate-900">Filters</p>
+              <button
+                type="button"
+                onClick={() => setFiltersOpen(false)}
+                className="rounded-lg border border-slate-200 p-2 text-slate-700"
+                aria-label="Close"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+            <PropertyFilters
+              filters={filters}
+              onChange={setFilters}
+              onReset={() => setFilters(defaultFilters)}
+              locations={locations}
+              className="border-0 p-0 shadow-none"
+            />
+            <PropertyAlertForm />
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }

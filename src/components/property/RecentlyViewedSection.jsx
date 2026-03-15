@@ -13,7 +13,7 @@ export default function RecentlyViewedSection({ properties = [] }) {
         title="Pick up where you left off."
         description="Your last viewed properties are kept here for quick revisits and comparison."
       />
-      <div className="mt-10 grid gap-8 md:grid-cols-2 xl:grid-cols-5">
+      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {properties.map((property) => (
           <PropertyCard key={property.id} property={property} />
         ))}

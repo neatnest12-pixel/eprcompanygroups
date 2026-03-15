@@ -22,6 +22,7 @@ export default function AgentProfile() {
           <img
             src={agentProfile.photo}
             alt={agentProfile.name}
+            loading="lazy"
             className="h-80 w-full rounded-xl object-cover"
           />
           <p className="mt-6 text-sm font-semibold uppercase tracking-[0.25em] text-orange-500">
@@ -93,7 +94,7 @@ export default function AgentProfile() {
             View all listings
           </Link>
         </div>
-        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {properties.map((property) => (
             <PropertyCard key={property.id} property={property} />
           ))}

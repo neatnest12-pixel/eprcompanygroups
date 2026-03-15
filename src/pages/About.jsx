@@ -20,7 +20,7 @@ export default function About() {
       <SectionHeading
         eyebrow="About ERP Group Company"
         title="About ERP Group Company"
-        description="Rich Man Maker"
+        description="Richman Maker"
       />
       <p className="mt-4 max-w-3xl text-base text-gray-500 leading-relaxed">
         ERP Group Company is a trusted real estate consultancy specializing in residential
@@ -30,7 +30,7 @@ export default function About() {
 
       <div className="mt-10 glass-panel p-8">
         <p className="text-xs font-bold uppercase tracking-[0.35em] text-orange-500">
-          Rich Man Maker
+          Richman Maker
         </p>
         <p className="mt-4 text-sm text-gray-500 leading-relaxed">
           ERP Group Company combines local market expertise with verified property

@@ -63,6 +63,7 @@ export default function Compare() {
                     <img
                       src={property.images[0]}
                       alt={property.title}
+                      loading="lazy"
                       className="h-36 w-full rounded-xl object-cover"
                     />
                     <div>

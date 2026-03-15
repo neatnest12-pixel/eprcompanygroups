@@ -1,53 +1,44 @@
-import { MapPin, PhoneCall } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-900 text-white">
-      <div className="container-shell section-shell grid grid-cols-1 gap-10 md:grid-cols-3">
+    <footer className="mt-20 bg-[#0a1b35] text-white">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-12 md:grid-cols-3">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.35em] text-orange-400">
-            ERP Group Company
-          </p>
-          <h2 className="mt-3 text-3xl font-semibold text-white">
-            ERP Group Company – Rich Man Maker
-          </h2>
-          <p className="mt-4 max-w-xl text-sm text-slate-300 leading-relaxed">
-            ERP Group Company helps buyers, sellers, landlords, and investors discover
-            quality opportunities across Chennai&apos;s fast-moving property corridors.
+          <h3 className="mb-4 text-xl font-semibold">ERP Group Company</h3>
+          <p className="text-sm text-gray-300">
+            ERP Group Company helps buyers, sellers and investors discover property
+            opportunities across Chennai.
           </p>
         </div>
 
         <div>
-          <h3 className="text-xl font-semibold text-white">Quick Links</h3>
-          <div className="mt-4 flex flex-col gap-3 text-sm text-slate-300">
-            <Link to="/">Home</Link>
-            <Link to="/properties">Properties</Link>
-            <Link to="/about">About</Link>
-            <Link to="/contact">Contact</Link>
-          </div>
+          <h4 className="mb-4 font-semibold">Quick Links</h4>
+          <ul className="space-y-2 text-gray-300">
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/properties">Properties</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/contact">Contact</Link>
+            </li>
+          </ul>
         </div>
 
         <div>
-          <h3 className="text-xl font-semibold text-white">Contact</h3>
-          <div className="mt-4 space-y-3 text-sm text-slate-300">
-            <p className="inline-flex items-center gap-2">
-              <PhoneCall className="h-4 w-4" />
-              7299007799 / 8939427799
-            </p>
-            <p className="inline-flex items-center gap-2">
-              <MapPin className="h-4 w-4" />
-              Chennai, Tamil Nadu, India
-            </p>
-            <a href="https://eprcompanygroup.in" className="font-semibold text-white">
-              eprcompanygroup.in
-            </a>
-          </div>
+          <h4 className="mb-4 font-semibold">Contact</h4>
+          <p>Phone: 7299007799 / 8939427799</p>
+          <p>Location: Chennai, Tamil Nadu</p>
         </div>
+      </div>
 
-        <div className="border-t border-slate-800 pt-6 md:col-span-3">
-          <p className="text-sm text-slate-400">© ERP Group Company</p>
-        </div>
+      <div className="border-t border-gray-700 py-4 text-center text-sm text-gray-400">
+        (c) 2026 ERP Group Company. All rights reserved.
       </div>
     </footer>
   );

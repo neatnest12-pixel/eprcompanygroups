@@ -13,6 +13,8 @@ export default function PropertyCard({ property, horizontal = false }) {
   const isFavorite = Boolean(user?.favorites?.includes(property.id));
   const isCompared = compareIds.includes(property.id);
   const statusLabels = getPropertyStatusLabels(property);
+  const priceText = property.priceLabel || formatCurrency(property.price);
+  const sizeText = property.size || (property.area ? `${property.area} sqft` : "");
 
   const handleFavorite = () => {
     try {
@@ -20,6 +22,26 @@ export default function PropertyCard({ property, horizontal = false }) {
     } catch (error) {
       window.alert(error.message);
     }
+  };
+
+  const handleWhatsAppEnquiry = () => {
+    const message = `
+Hello ERP Group Company,
+
+I am interested in this property.
+
+Property: ${property.title}
+Location: ${property.location}
+Price: ${priceText}
+Size: ${sizeText}
+
+Please share more details.
+`;
+
+    const whatsappUrl = `https://wa.me/918939427799?text=${encodeURIComponent(
+      message
+    )}`;
+    window.open(whatsappUrl, "_blank");
   };
 
   return (
@@ -35,6 +57,7 @@ export default function PropertyCard({ property, horizontal = false }) {
         <img
           src={property.images?.[0]}
           alt={property.title}
+          loading="lazy"
           className={cn(
             "w-full object-cover transition-transform duration-500 group-hover:scale-110",
             horizontal ? "h-full min-h-[220px]" : "aspect-[4/3] rounded-t-xl"
@@ -119,8 +142,15 @@ export default function PropertyCard({ property, horizontal = false }) {
             <GitCompareArrows className="h-4 w-4" />
             {isCompared ? "Added to Compare" : "Compare"}
           </button>
+          <button
+            type="button"
+            onClick={handleWhatsAppEnquiry}
+            className="w-full rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600"
+          >
+            WhatsApp Enquiry
+          </button>
           <Link to={`/properties/${property.id}`} className="block">
-            <Button className="mt-3 w-full">View details</Button>
+            <Button className="mt-3 w-full md:w-auto">View details</Button>
           </Link>
         </div>
       </div>
