@@ -8,3 +8,4 @@ backend/dist/
 .env.*
 *.log
 vite-dev.log
+.playwright-cli/
