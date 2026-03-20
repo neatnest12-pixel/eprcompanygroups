@@ -1,5 +1,7 @@
 main/**/node_modules/
 main/**/dist/
+main/**/.next/
+main/**/out/
 main/**/.env
 main/**/.env.*
 main/**/vite-dev.log
