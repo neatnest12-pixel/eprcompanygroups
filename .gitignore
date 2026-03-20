@@ -6,3 +6,5 @@ main/**/vite-dev.log
 main/**/output/
 main/**/.playwright-cli/
 *.log
+
+.vercel
