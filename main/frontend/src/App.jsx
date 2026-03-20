@@ -46,7 +46,7 @@ function AppShell() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-[#0B5D3B] via-[#0F7A45] to-[#16A34A] text-white">
       <Navbar />
       <main>
         <AnimatePresence mode="wait">
