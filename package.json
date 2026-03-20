@@ -1,0 +1,7 @@
+{
+  "name": "eprcompanygroups-root",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix main/frontend install --no-audit --no-fund && npm --prefix main/frontend run build && rm -rf dist && cp -R main/frontend/dist dist"
+  }
+}
