@@ -34,10 +34,7 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-4 md:flex">
-          <a
-            href="tel:+918939427799"
-            className="inline-flex items-center gap-2 rounded-full border border-white/40 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
-          >
+          <a href="tel:+918939427799" className="btn-gold">
             <PhoneCall className="h-4 w-4" />
             Call Now
           </a>
@@ -66,10 +63,7 @@ export default function Navbar() {
                 {item.label}
               </Link>
             ))}
-            <a
-              href="tel:+918939427799"
-              className="inline-flex items-center gap-2 rounded-full border border-white/40 px-4 py-2 text-sm font-semibold text-white"
-            >
+            <a href="tel:+918939427799" className="btn-gold">
               <PhoneCall className="h-4 w-4" />
               Call Now
             </a>

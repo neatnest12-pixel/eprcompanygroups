@@ -13,13 +13,13 @@ export default function ContactPage() {
           <div className="mt-6 flex flex-wrap gap-4">
             <a
               href="tel:+918939427799"
-              className="inline-flex items-center gap-2 rounded-full border border-white/40 px-4 py-2 text-sm font-semibold text-white"
+              className="btn-outline"
             >
               Call Now
             </a>
             <a
               href="https://wa.me/918939427799?text=Hi%2C%20I%27m%20interested%20in%20your%20property%20services"
-              className="inline-flex items-center gap-2 rounded-full bg-[#16A34A] px-4 py-2 text-sm font-semibold text-white"
+              className="btn-gold"
             >
               WhatsApp
             </a>

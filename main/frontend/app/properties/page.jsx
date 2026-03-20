@@ -40,11 +40,11 @@ export default function PropertiesPage() {
           <h1 className="section-title mt-3">Verified Listings</h1>
         </div>
 
-        <div className="glass-panel grid gap-4 p-6 md:grid-cols-3">
+        <div className="card-white grid gap-4 p-6 md:grid-cols-3">
           <select
             value={location}
             onChange={(event) => setLocation(event.target.value)}
-            className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white/90 focus:outline-none"
+            className="rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 focus:outline-none"
           >
             {locations.map((item) => (
               <option key={item} className="text-[#0B5D3B]">
@@ -55,7 +55,7 @@ export default function PropertiesPage() {
           <select
             value={type}
             onChange={(event) => setType(event.target.value)}
-            className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white/90 focus:outline-none"
+            className="rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 focus:outline-none"
           >
             {types.map((item) => (
               <option key={item} className="text-[#0B5D3B]">
@@ -66,7 +66,7 @@ export default function PropertiesPage() {
           <select
             value={budget}
             onChange={(event) => setBudget(event.target.value)}
-            className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white/90 focus:outline-none"
+            className="rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 focus:outline-none"
           >
             {budgets.map((item) => (
               <option key={item} className="text-[#0B5D3B]">
@@ -78,7 +78,7 @@ export default function PropertiesPage() {
 
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {filtered.map((property) => (
-            <div key={property.id} className="glass-panel overflow-hidden">
+            <div key={property.id} className="card-white overflow-hidden hover-lift">
               <img
                 src={property.images[0]}
                 alt={`${property.title} property`}
@@ -86,22 +86,24 @@ export default function PropertiesPage() {
                 loading="lazy"
               />
               <div className="p-5">
-                <p className="text-sm text-white/70">{property.location}</p>
-                <h3 className="mt-2 text-lg font-semibold text-white">{property.title}</h3>
-                <div className="mt-3 flex items-center justify-between text-sm text-white/80">
+                <p className="text-sm text-emerald-700/70">{property.location}</p>
+                <h3 className="mt-2 text-lg font-semibold text-emerald-950">
+                  {property.title}
+                </h3>
+                <div className="mt-3 flex items-center justify-between text-sm text-emerald-700">
                   <span>{property.type}</span>
-                  <span className="font-semibold">{property.price}</span>
+                  <span className="font-semibold text-emerald-900">{property.price}</span>
                 </div>
                 <div className="mt-4 flex flex-col gap-2">
                   <Link
                     href={`/properties/${property.id}`}
-                    className="w-full rounded-full border border-white/30 px-4 py-2 text-center text-sm font-semibold text-white transition hover:bg-white/10"
+                    className="btn-outline w-full text-center text-emerald-950 border-emerald-200"
                   >
                     View Details
                   </Link>
                   <a
                     href="tel:+918939427799"
-                    className="w-full rounded-full border border-white/30 px-4 py-2 text-center text-sm font-semibold text-white/90 hover:bg-white/10"
+                    className="btn-outline w-full text-center text-emerald-950 border-emerald-200"
                   >
                     Call Now
                   </a>

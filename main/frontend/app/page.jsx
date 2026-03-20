@@ -16,7 +16,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-[#0B5D3B]/80" />
 
         <div className="container-shell relative z-10 flex min-h-screen flex-col justify-center py-24">
-          <div className="max-w-3xl animate-fade-up">
+          <div className="max-w-3xl fade-in">
             <p className="mb-6 text-sm uppercase tracking-[0.4em] text-white/70">EPR</p>
             <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl">
               EPR GROUP COMPANY
@@ -29,41 +29,32 @@ export default function HomePage() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                href="/properties"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#0B5D3B] transition hover:bg-white/90"
-              >
+              <Link href="/properties" className="btn-gold">
                 Explore Properties
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
-              >
+              <Link href="/contact" className="btn-outline">
                 Contact Now
               </Link>
-              <a
-                href="tel:+918939427799"
-                className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
-              >
+              <a href="tel:+918939427799" className="btn-outline">
                 Call Now
               </a>
             </div>
           </div>
 
-          <div className="glass-panel mt-10 grid gap-4 p-6 md:grid-cols-[1.3fr_1fr_1fr_auto]">
+          <div className="card-white mt-10 grid gap-4 p-6 md:grid-cols-[1.3fr_1fr_1fr_auto]">
             <input
               type="text"
               placeholder="Enter location"
-              className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30"
+              className="w-full rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 placeholder-emerald-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40"
             />
-            <select className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white/90 focus:outline-none focus:ring-2 focus:ring-white/30">
+            <select className="w-full rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40">
               <option className="text-[#0B5D3B]">Property type</option>
               <option className="text-[#0B5D3B]">Villa</option>
               <option className="text-[#0B5D3B]">Apartment</option>
               <option className="text-[#0B5D3B]">Plot</option>
             </select>
-            <select className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white/90 focus:outline-none focus:ring-2 focus:ring-white/30">
+            <select className="w-full rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40">
               <option className="text-[#0B5D3B]">Budget</option>
               <option className="text-[#0B5D3B]">Rs 40L - Rs 70L</option>
               <option className="text-[#0B5D3B]">Rs 70L - Rs 1Cr</option>
@@ -71,7 +62,7 @@ export default function HomePage() {
             </select>
             <button
               type="button"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#16A34A] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#14a346]"
+              className="btn-gold"
             >
               Search
               <ArrowRight className="h-4 w-4" />
@@ -88,7 +79,7 @@ export default function HomePage() {
           </div>
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {properties.map((property) => (
-              <div key={property.id} className="glass-panel overflow-hidden">
+              <div key={property.id} className="card-white overflow-hidden hover-lift">
                 <img
                   src={property.images[0]}
                   alt={`${property.title} property`}
@@ -96,22 +87,22 @@ export default function HomePage() {
                   loading="lazy"
                 />
                 <div className="p-5">
-                  <p className="text-sm text-white/70">{property.location}</p>
-                  <h3 className="mt-2 text-lg font-semibold text-white">{property.title}</h3>
-                  <div className="mt-3 flex items-center justify-between text-sm text-white/80">
+                  <p className="text-sm text-emerald-700/70">{property.location}</p>
+                  <h3 className="mt-2 text-lg font-semibold text-emerald-950">{property.title}</h3>
+                  <div className="mt-3 flex items-center justify-between text-sm text-emerald-700">
                     <span>{property.type}</span>
-                    <span className="font-semibold">{property.price}</span>
+                    <span className="font-semibold text-emerald-900">{property.price}</span>
                   </div>
                   <div className="mt-4 flex flex-col gap-2">
                     <Link
                       href={`/properties/${property.id}`}
-                      className="w-full rounded-full border border-white/30 px-4 py-2 text-center text-sm font-semibold text-white transition hover:bg-white/10"
+                      className="btn-outline w-full text-center text-emerald-950 border-emerald-200"
                     >
                       View Details
                     </Link>
                     <a
                       href="tel:+918939427799"
-                      className="w-full rounded-full border border-white/30 px-4 py-2 text-center text-sm font-semibold text-white/90 hover:bg-white/10"
+                      className="btn-outline w-full text-center text-emerald-950 border-emerald-200"
                     >
                       Call Now
                     </a>
@@ -133,9 +124,9 @@ export default function HomePage() {
           ].map((item) => {
             const Icon = item.icon;
             return (
-              <div key={item.title} className="glass-panel flex items-center gap-4 p-6">
-                <Icon className="h-6 w-6 text-white" />
-                <p className="text-sm font-semibold text-white">{item.title}</p>
+              <div key={item.title} className="card-white flex items-center gap-4 p-6 hover-lift">
+                <Icon className="h-6 w-6 text-emerald-900" />
+                <p className="text-sm font-semibold text-emerald-900">{item.title}</p>
               </div>
             );
           })}
@@ -166,9 +157,9 @@ export default function HomePage() {
                   "Exceptional service and transparency. The investment consulting was clear and confidence-building."
               }
             ].map((item) => (
-              <div key={item.name} className="glass-panel p-6">
-                <p className="text-sm text-white/80">"{item.feedback}"</p>
-                <p className="mt-4 text-sm font-semibold text-white">{item.name}</p>
+              <div key={item.name} className="card-white p-6 hover-lift">
+                <p className="text-sm text-emerald-800">"{item.feedback}"</p>
+                <p className="mt-4 text-sm font-semibold text-emerald-950">{item.name}</p>
               </div>
             ))}
           </div>

@@ -33,12 +33,14 @@ export default function ServicesPage() {
           {services.map((service) => {
             const Icon = service.icon;
             return (
-              <div key={service.title} className="glass-panel p-6">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15">
-                  <Icon className="h-6 w-6 text-white" />
+              <div key={service.title} className="card-white p-6 hover-lift">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/15">
+                  <Icon className="h-6 w-6 text-emerald-900" />
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-white">{service.title}</h3>
-                <p className="mt-3 text-sm text-white/70">{service.description}</p>
+                <h3 className="mt-4 text-lg font-semibold text-emerald-950">
+                  {service.title}
+                </h3>
+                <p className="mt-3 text-sm text-emerald-800">{service.description}</p>
               </div>
             );
           })}

@@ -18,42 +18,42 @@ export default function ContactForm({ redirectToWhatsApp = false }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="glass-panel space-y-4 p-6">
+    <form onSubmit={handleSubmit} className="card-white space-y-4 p-6">
       <input
-        className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30"
+        className="w-full rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 placeholder-emerald-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40"
         placeholder="Name"
         name="name"
         type="text"
         required
       />
       <input
-        className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30"
+        className="w-full rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 placeholder-emerald-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40"
         placeholder="Phone"
         name="phone"
         type="tel"
         required
       />
       <input
-        className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30"
+        className="w-full rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 placeholder-emerald-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40"
         placeholder="Email"
         name="email"
         type="email"
         required
       />
       <textarea
-        className="h-32 w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30"
+        className="h-32 w-full rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 placeholder-emerald-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40"
         placeholder="Message"
         name="message"
         required
       />
       <button
         type="submit"
-        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#0B5D3B]"
+        className="btn-gold w-full"
       >
         Send Message
       </button>
       {submitted ? (
-        <p className="text-sm text-white/80">Thanks! We will contact you shortly.</p>
+        <p className="text-sm text-emerald-700">Thanks! We will contact you shortly.</p>
       ) : null}
     </form>
   );

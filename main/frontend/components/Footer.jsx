@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="container-shell grid gap-10 py-12 md:grid-cols-3">
         <div>
           <h3 className="text-xl font-semibold">EPR GROUP COMPANY</h3>
-          <p className="mt-2 text-sm uppercase tracking-[0.3em] text-white/70">
+          <p className="mt-2 text-sm uppercase tracking-[0.3em] text-[#D4AF37]">
             Richman Maker
           </p>
           <p className="mt-4 text-sm text-white/70">
