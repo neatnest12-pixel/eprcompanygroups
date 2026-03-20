@@ -33,7 +33,13 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="hidden items-center gap-3 md:flex">
+          <Link
+            href="/login"
+            className="rounded-full border border-white/30 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+          >
+            Admin Login
+          </Link>
           <a href="tel:+918939427799" className="btn-gold">
             <PhoneCall className="h-4 w-4" />
             Call Now
@@ -63,6 +69,12 @@ export default function Navbar() {
                 {item.label}
               </Link>
             ))}
+            <Link
+              href="/login"
+              className="rounded-full border border-white/30 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+            >
+              Admin Login
+            </Link>
             <a href="tel:+918939427799" className="btn-gold">
               <PhoneCall className="h-4 w-4" />
               Call Now
