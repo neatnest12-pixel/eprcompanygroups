@@ -6,6 +6,10 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/api/(.*)",
+      "destination": "https://backend-cyan-mu-66.vercel.app/api/$1"
+    },
+    {
       "source": "/(.*)",
       "destination": "/"
     }
