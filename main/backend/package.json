@@ -11,6 +11,9 @@
   "author": "ERP Group Company",
   "license": "ISC",
   "type": "commonjs",
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
     "cloudinary": "^1.41.3",
     "cors": "^2.8.6",
