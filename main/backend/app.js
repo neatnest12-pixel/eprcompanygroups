@@ -11,11 +11,12 @@ const allowedOrigins = frontendUrl
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
+const allowAllOrigins = allowedOrigins.length === 0 || allowedOrigins.includes("*");
 
 app.use(
   cors({
     origin(origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (!origin || allowAllOrigins || allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
 
