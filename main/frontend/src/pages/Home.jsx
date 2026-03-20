@@ -3,7 +3,7 @@ import {
   ArrowRight,
   BadgeCheck,
   Building2,
-  Home,
+  Home as HomeIcon,
   Landmark,
   MessageCircle,
   PhoneCall,
@@ -15,7 +15,7 @@ import {
 const featuredProperties = [
   {
     title: "Palm Grove Villas",
-    price: "₹1.25 Cr",
+    price: "Rs 1.25 Cr",
     location: "ECR, Chennai",
     type: "Villa",
     image:
@@ -23,7 +23,7 @@ const featuredProperties = [
   },
   {
     title: "Skyline Residences",
-    price: "₹78 Lakh",
+    price: "Rs 78 Lakh",
     location: "OMR, Chennai",
     type: "Apartment",
     image:
@@ -31,7 +31,7 @@ const featuredProperties = [
   },
   {
     title: "Emerald Plots",
-    price: "₹45 Lakh",
+    price: "Rs 45 Lakh",
     location: "Siruseri, Chennai",
     type: "Plot",
     image:
@@ -39,7 +39,7 @@ const featuredProperties = [
   },
   {
     title: "Harbor View",
-    price: "₹92 Lakh",
+    price: "Rs 92 Lakh",
     location: "Padur, Chennai",
     type: "Apartment",
     image:
@@ -48,7 +48,7 @@ const featuredProperties = [
 ];
 
 const services = [
-  { icon: Home, title: "Property Buying" },
+  { icon: HomeIcon, title: "Property Buying" },
   { icon: Landmark, title: "Property Selling" },
   { icon: Sparkles, title: "Investment Consulting" },
   { icon: Building2, title: "Digital Property Marketing" }
@@ -139,9 +139,9 @@ export default function Home() {
             </select>
             <select className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white/90 focus:outline-none focus:ring-2 focus:ring-white/30">
               <option className="text-[#0B5D3B]">Budget</option>
-              <option className="text-[#0B5D3B]">₹40L - ₹70L</option>
-              <option className="text-[#0B5D3B]">₹70L - ₹1Cr</option>
-              <option className="text-[#0B5D3B]">₹1Cr+</option>
+              <option className="text-[#0B5D3B]">Rs 40L - Rs 70L</option>
+              <option className="text-[#0B5D3B]">Rs 70L - Rs 1Cr</option>
+              <option className="text-[#0B5D3B]">Rs 1Cr+</option>
             </select>
             <button
               type="button"
@@ -249,7 +249,7 @@ export default function Home() {
           <div className="grid gap-6 md:grid-cols-3">
             {testimonials.map((item) => (
               <div key={item.name} className="glass-panel p-6">
-                <p className="text-sm text-white/80">“{item.feedback}”</p>
+                <p className="text-sm text-white/80">"{item.feedback}"</p>
                 <p className="mt-4 text-sm font-semibold text-white">{item.name}</p>
               </div>
             ))}
