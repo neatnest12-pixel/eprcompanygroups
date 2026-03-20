@@ -28,7 +28,7 @@ export default function ImageGallery({ images = [], title }) {
       <div className="relative overflow-hidden rounded-xl shadow-md">
         <img
           src={activeImage}
-          alt={title}
+          alt={`${title} property image ERP Group Company`}
           loading="lazy"
           className="h-[420px] w-full object-cover"
         />
@@ -80,7 +80,7 @@ export default function ImageGallery({ images = [], title }) {
           >
             <img
               src={image}
-              alt={`${title} ${index + 1}`}
+              alt={`${title} property image ${index + 1} ERP Group Company`}
               loading="lazy"
               className="h-24 w-full object-cover"
             />
