@@ -1,8 +1,14 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useIsMobile } from "../../hooks/use-mobile";
 import { useAuth } from "../../lib/AuthContext";
+
+function navLinkClass({ isActive }) {
+  return `text-sm font-medium transition ${
+    isActive ? "text-orange-500" : "text-gray-700 hover:text-orange-500"
+  }`;
+}
 
 export default function Navbar() {
   const { user, isAdmin, logout } = useAuth();
@@ -11,12 +17,15 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navItems = [
-    { href: "#home", label: "Home" },
-    { href: "#about", label: "About" },
-    { href: "#services", label: "Services" },
-    { href: "#projects", label: "Projects" },
-    { href: "#contact", label: "Contact" }
+    { to: "/", label: "Home" },
+    { to: "/properties", label: "Properties" },
+    { to: "/about", label: "About" },
+    { to: "/contact", label: "Contact" }
   ];
+
+  if (isAdmin) {
+    navItems.push({ to: "/admin", label: "Admin Dashboard" });
+  }
 
   const handleLogout = () => {
     setMenuOpen(false);
@@ -25,40 +34,35 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#0b5d3b]/80 backdrop-blur">
+    <header className="sticky top-0 z-50 w-full bg-white shadow-sm">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <a href="#home" className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/40 text-sm font-semibold">
-            EPR
-          </div>
+        <Link to="/" className="flex items-center gap-2">
+          <img src="/logo.png" alt="ERP Group Company" className="h-10 w-auto" />
           <div className="flex flex-col leading-tight">
-            <p className="text-sm font-semibold text-white md:text-lg">EPR GROUP COMPANY</p>
-            <p className="text-xs text-white/70">Richman Maker</p>
+            <p className="text-sm font-semibold text-slate-900 md:text-lg">
+              ERP Group Company
+            </p>
+            <p className="text-xs text-gray-500">Richman Maker</p>
           </div>
-        </a>
+        </Link>
 
-        <nav className="hidden flex-1 items-center justify-center gap-8 text-white/80 md:flex">
+        <nav className="hidden flex-1 items-center justify-center gap-8 text-gray-700 md:flex">
           {navItems.map((item) => (
-            <a key={item.href} href={item.href} className="text-sm font-medium transition hover:text-white">
+            <NavLink key={item.to} to={item.to} className={navLinkClass}>
               {item.label}
-            </a>
+            </NavLink>
           ))}
-          {isAdmin ? (
-            <Link to="/admin" className="text-sm font-medium text-white/90 hover:text-white">
-              Admin Dashboard
-            </Link>
-          ) : null}
         </nav>
 
         <div className="hidden items-center gap-5 md:flex">
-          <span className="text-sm font-medium text-white/80">7299007799</span>
+          <span className="text-sm font-medium text-gray-700">7299007799</span>
           {isAdmin ? (
             <>
-              <span className="text-sm text-white/70">{user?.email}</span>
+              <span className="text-sm text-gray-700">{user?.email}</span>
               <button
                 type="button"
                 onClick={handleLogout}
-                className="text-sm font-medium text-white/80 hover:text-white"
+                className="text-sm font-medium text-gray-700 hover:text-orange-500"
               >
                 Logout
               </button>
@@ -66,7 +70,7 @@ export default function Navbar() {
           ) : (
             <Link
               to="/login"
-              className="rounded-full border border-white/40 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+              className="rounded-lg bg-orange-500 px-4 py-2 text-sm font-medium text-white"
             >
               Admin Login
             </Link>
@@ -76,50 +80,41 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => setMenuOpen((current) => !current)}
-          className="rounded-lg border border-white/30 p-2 text-white md:hidden"
+          className="rounded-lg border border-gray-200 p-2 text-gray-700 md:hidden"
           aria-label="Toggle navigation"
         >
           {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
 
         {menuOpen && isMobile ? (
-          <div className="absolute left-0 top-16 w-full border-t border-white/10 bg-[#0b5d3b]/95 px-6 pb-6 pt-4 shadow-xl md:hidden">
-            <nav className="flex flex-col gap-4 text-white/80">
+          <div className="absolute left-0 top-16 w-full border-t border-gray-200 bg-white px-6 pb-6 pt-4 shadow-md md:hidden">
+            <nav className="flex flex-col gap-4">
               {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="text-sm font-medium hover:text-white"
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  className={navLinkClass}
                   onClick={() => setMenuOpen(false)}
                 >
                   {item.label}
-                </a>
+                </NavLink>
               ))}
-              {isAdmin ? (
-                <Link
-                  to="/admin"
-                  className="text-sm font-medium text-white/90 hover:text-white"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Admin Dashboard
-                </Link>
-              ) : null}
             </nav>
 
-            <div className="mt-6 flex flex-col gap-3 text-sm text-white/80">
+            <div className="mt-6 flex flex-col gap-3 text-sm text-gray-700">
               <span className="font-medium">7299007799</span>
               {isAdmin ? (
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="text-left font-medium text-white/90 hover:text-white"
+                  className="text-left font-medium text-gray-700 hover:text-orange-500"
                 >
                   Logout
                 </button>
               ) : (
                 <Link
                   to="/login"
-                  className="w-full rounded-full border border-white/40 px-4 py-2 text-center font-medium text-white"
+                  className="w-full rounded-lg bg-orange-500 px-4 py-2 text-center font-medium text-white"
                   onClick={() => setMenuOpen(false)}
                 >
                   Admin Login
