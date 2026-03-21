@@ -32,7 +32,7 @@ export default function Navbar() {
     >
       <div
         className={`container-shell flex items-center justify-between transition-all duration-300 ${
-          scrolled ? "h-14" : "h-20"
+          scrolled ? "h-16" : "h-[70px]"
         }`}
       >
         <Link href="/" className="flex items-center gap-3 text-[#1E3A5F]">

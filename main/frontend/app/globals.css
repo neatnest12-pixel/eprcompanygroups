@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,10 +13,37 @@ html {
 }
 
 body {
-  @apply bg-[#E6F4EA] text-[#1A1A1A] antialiased;
-  background-image:
-    radial-gradient(circle at top left, rgba(46, 125, 50, 0.16), transparent 30%),
-    radial-gradient(circle at top right, rgba(201, 162, 74, 0.08), transparent 24%);
+  @apply bg-white text-[#1A1A1A] antialiased;
+  font-family: "Poppins", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Playfair Display", serif;
+  letter-spacing: -0.5px;
+}
+
+h1 {
+  font-size: 56px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  h1 {
+    font-size: 36px;
+  }
 }
 
 a {
@@ -32,15 +61,15 @@ a {
 }
 
 .container-shell {
-  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  @apply mx-auto w-full max-w-[1200px] px-6;
 }
 
 .section-shell {
-  @apply py-20 lg:py-24;
+  @apply py-10 lg:py-20;
 }
 
 .card-white {
-  @apply rounded-[24px] border border-[#E5EAF1] bg-white text-[#1A1A1A] shadow-[0_18px_50px_rgba(30,58,95,0.08)];
+  @apply rounded-xl border border-[#E5EAF1] bg-white text-[#1A1A1A] shadow-[0_14px_32px_rgba(30,58,95,0.08)];
 }
 
 .glass-panel {
@@ -48,8 +77,8 @@ a {
 }
 
 .section-title {
-  @apply text-3xl font-semibold tracking-tight text-[#1E3A5F] sm:text-4xl;
-  font-family: var(--font-display);
+  @apply text-[36px] font-semibold tracking-[-0.5px] text-[#1E3A5F];
+  font-family: "Playfair Display", serif;
 }
 
 .section-subtitle {
@@ -98,8 +127,8 @@ a {
 }
 
 .btn-gold {
-  @apply inline-flex items-center justify-center gap-2 rounded-full bg-[#C9A24A] px-6 py-3 text-sm font-semibold text-white;
-  box-shadow: 0 14px 35px rgba(201, 162, 74, 0.3);
+  @apply inline-flex items-center justify-center gap-2 rounded-lg bg-[#C9A24A] px-5 py-3 text-sm font-semibold text-white;
+  box-shadow: 0 10px 26px rgba(201, 162, 74, 0.24);
 }
 
 .btn-gold:hover {
@@ -109,19 +138,20 @@ a {
 }
 
 .btn-outline {
-  @apply inline-flex items-center justify-center gap-2 rounded-full border border-[#1E3A5F]/20 bg-white px-6 py-3 text-sm font-semibold text-[#1E3A5F];
+  @apply inline-flex items-center justify-center gap-2 rounded-lg border border-[#1E3A5F]/30 bg-white px-5 py-3 text-sm font-semibold text-[#1E3A5F];
 }
 
 .btn-outline:hover {
   transform: translateY(-2px) scale(1.05);
   border-color: #c9a24a;
-  color: #c9a24a;
+  background: #c9a24a;
+  color: #ffffff;
   box-shadow: 0 16px 40px rgba(30, 58, 95, 0.08);
 }
 
 .btn-orange {
-  @apply inline-flex items-center justify-center gap-2 rounded-full bg-[#F97316] px-6 py-3 text-sm font-semibold text-white;
-  box-shadow: 0 14px 35px rgba(249, 115, 22, 0.3);
+  @apply inline-flex items-center justify-center gap-2 rounded-lg bg-[#F97316] px-5 py-3 text-sm font-semibold text-white;
+  box-shadow: 0 10px 26px rgba(249, 115, 22, 0.3);
 }
 
 .btn-orange:hover {

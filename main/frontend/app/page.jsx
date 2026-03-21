@@ -37,12 +37,12 @@ export default function HomePage() {
   return (
     <>
       <section className="relative overflow-hidden bg-gradient-to-br from-[#0B1C33] via-[#1E3A5F] to-[#0F223A]">
-        <div className="container-shell grid min-h-[85vh] gap-12 py-24 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="container-shell grid min-h-[70vh] gap-12 py-20 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="max-w-2xl text-white">
             <p className="text-sm font-semibold uppercase tracking-[0.38em] text-[#C9A24A]">
               ERP GROUP COMPANY
             </p>
-            <h1 className="mt-5 text-5xl font-bold leading-tight sm:text-6xl">
+            <h1 className="mt-5 text-[36px] font-semibold leading-[1.2] sm:text-[56px]">
               Find Your Dream Property
             </h1>
             <p className="mt-4 text-xl font-semibold text-[#C9A24A]">
@@ -102,7 +102,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section-shell bg-[#E6F4EA]">
+      <section className="section-shell bg-[#F5F7FA]">
         <div className="container-shell space-y-8">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -135,7 +135,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section-shell bg-[#E6F4EA]">
+      <section className="section-shell bg-[#F5F7FA]">
         <div className="container-shell space-y-8">
           <div>
             <p className="section-subtitle">Popular Locations</p>
