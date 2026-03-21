@@ -18,6 +18,7 @@ const navLinks = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -25,6 +26,18 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll);
 
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const syncAuth = () => {
+      const stored = window.localStorage.getItem("erp-admin-auth");
+      setIsAdminLoggedIn(Boolean(stored));
+    };
+
+    syncAuth();
+    window.addEventListener("storage", syncAuth);
+
+    return () => window.removeEventListener("storage", syncAuth);
   }, []);
 
   return (
@@ -66,10 +79,10 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-3 md:flex">
           <Link
-            href="/login"
+            href={isAdminLoggedIn ? "/admin" : "/login"}
             className="rounded-full border border-[#1E3A5F]/20 px-4 py-2 text-sm font-semibold text-[#1E3A5F] hover:border-[#C9A24A] hover:text-[#C9A24A]"
           >
-            Admin Login
+            {isAdminLoggedIn ? "Dashboard" : "Admin Login"}
           </Link>
           <a href={company.phoneHref} className="btn-gold">
             <PhoneCall className="h-4 w-4" />
@@ -101,10 +114,10 @@ export default function Navbar() {
               </Link>
             ))}
             <Link
-              href="/login"
+              href={isAdminLoggedIn ? "/admin" : "/login"}
               className="rounded-full border border-[#1E3A5F]/20 px-4 py-2 text-sm font-semibold text-[#1E3A5F] hover:border-[#C9A24A] hover:text-[#C9A24A]"
             >
-              Admin Login
+              {isAdminLoggedIn ? "Dashboard" : "Admin Login"}
             </Link>
             <a href={company.phoneHref} className="btn-gold">
               <PhoneCall className="h-4 w-4" />

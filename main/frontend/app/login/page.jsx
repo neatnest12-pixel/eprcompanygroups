@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [status, setStatus] = useState({ type: "", message: "" });
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,6 +35,9 @@ export default function LoginPage() {
       window.localStorage.setItem("erp-admin-auth", JSON.stringify(data));
       setStatus({ type: "success", message: "Login successful. You can now manage listings." });
       form.reset();
+      window.setTimeout(() => {
+        router.push("/admin");
+      }, 500);
     } catch (error) {
       setStatus({
         type: "error",
