@@ -89,6 +89,11 @@ export default function AboutPage() {
             or planning a long-term land investment near Chengalpattu, Richman Maker is ready to
             help you with clarity, confidence, and process support.
           </p>
+          <p className="mt-4 text-base leading-8 text-emerald-800">
+            Buyers often contact us when they are tired of generic promises and want someone to
+            explain the market in a practical way. If that sounds familiar, this is the right
+            time to start the conversation.
+          </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a href={company.phoneHref} className="btn-gold">
               Call {company.phone}

@@ -50,6 +50,11 @@ export default function ContactPage() {
                   WhatsApp Us
                 </a>
               </div>
+              <p className="mt-5 text-sm leading-7 text-emerald-800">
+                Fast response matters in real estate because the best-value plots often attract
+                attention quickly. If you already have a location or budget in mind, contact us
+                now and we will help you move faster with more clarity.
+              </p>
             </div>
 
             <div className="card-white overflow-hidden">

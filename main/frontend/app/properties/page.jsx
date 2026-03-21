@@ -1,3 +1,4 @@
+import Link from "next/link";
 import PropertiesCatalog from "../../components/PropertiesCatalog";
 
 export const metadata = {
@@ -26,6 +27,30 @@ export default function PropertiesPage() {
             size, buyer benefits, and an investment-focused explanation so you can compare more
             intelligently before you book a site visit.
           </p>
+        </div>
+
+        <div className="card-white p-8">
+          <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div>
+              <h2 className="text-2xl font-semibold text-emerald-950">
+                Not sure which location fits your budget best?
+              </h2>
+              <p className="mt-4 text-base leading-8 text-emerald-800">
+                Many buyers start with a general idea like "Tambaram or Guduvanchery" but need
+                help narrowing the right project. Richman Maker can help you compare location
+                quality, future value, documentation comfort, and affordability before you waste
+                time on the wrong site visit.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3 lg:justify-end">
+              <a href="tel:+918939427799" className="btn-gold">
+                Call for Shortlist Help
+              </a>
+              <Link href="/contact" className="btn-outline border-emerald-200 text-emerald-950">
+                Request Callback
+              </Link>
+            </div>
+          </div>
         </div>
 
         <PropertiesCatalog />

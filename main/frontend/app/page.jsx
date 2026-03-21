@@ -57,6 +57,21 @@ export default function HomePage() {
               around trust.
             </p>
 
+            <div className="mt-6 flex flex-wrap gap-3 text-sm text-white/85">
+              {[
+                "DTCP and approval-focused guidance",
+                "Site visit support across Chennai growth zones",
+                "Documentation clarity before commitment"
+              ].map((item) => (
+                <span
+                  key={item}
+                  className="rounded-full border border-white/20 bg-white/10 px-4 py-2"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+
             <div className="mt-8 flex flex-wrap gap-4">
               <a href={company.phoneHref} className="btn-gold">
                 Call Now
@@ -92,6 +107,28 @@ export default function HomePage() {
             <Link href="/properties" className="btn-gold">
               Search
             </Link>
+          </div>
+
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {[
+              {
+                title: "Trusted by serious buyers",
+                text: "Families and investors come to us when they want less confusion and more confidence."
+              },
+              {
+                title: "Built around ROI and safety",
+                text: "We look at both documentation comfort and future resale logic before we recommend a plot."
+              },
+              {
+                title: "Strong Chennai local focus",
+                text: "Tambaram, Guduvanchery, Vandalur, and Chengalpattu remain at the center of our buyer guidance."
+              }
+            ].map((item) => (
+              <div key={item.title} className="rounded-2xl border border-white/15 bg-white/10 p-5 backdrop-blur">
+                <p className="text-sm font-semibold text-white">{item.title}</p>
+                <p className="mt-2 text-sm leading-7 text-white/78">{item.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -301,6 +338,15 @@ export default function HomePage() {
                 Book your site visit before the next price increase changes the entry point.
               </h2>
               <p className="mt-5 text-base leading-8 text-emerald-800">{finalCtaText}</p>
+              <div className="mt-5 rounded-2xl bg-emerald-50 p-5">
+                <p className="text-sm font-semibold text-emerald-950">
+                  Best for buyers who want:
+                </p>
+                <p className="mt-2 text-sm leading-7 text-emerald-800">
+                  Clear documents, a strong location story, better appreciation potential, and a
+                  smoother path from inquiry to ownership.
+                </p>
+              </div>
             </div>
             <div className="space-y-4">
               <a href={company.phoneHref} className="btn-gold w-full">
