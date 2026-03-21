@@ -22,9 +22,11 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#0B5D3B]/85 backdrop-blur">
       <div className="container-shell flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-3 text-white">
-          <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/40 text-sm font-semibold">
-            RM
-          </span>
+          <img
+            src="/logo.png"
+            alt="ERP Group Company Richman Maker logo"
+            className="h-12 w-auto rounded-lg bg-white/95 p-1 shadow-sm"
+          />
           <span className="hidden text-sm font-semibold sm:block">Richman Maker</span>
         </Link>
 

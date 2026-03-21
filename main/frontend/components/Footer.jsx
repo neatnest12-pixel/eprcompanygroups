@@ -6,8 +6,12 @@ export default function Footer() {
     <footer className="mt-16 border-t border-white/10 bg-[#0B5D3B]/85 text-white">
       <div className="container-shell grid gap-10 py-12 md:grid-cols-3">
         <div>
-          <h3 className="text-xl font-semibold">Richman Maker</h3>
-          <p className="mt-2 text-sm uppercase tracking-[0.3em] text-[#D4AF37]">
+          <img
+            src="/logo.png"
+            alt="ERP Group Company Richman Maker Land Promoters logo"
+            className="h-24 w-auto rounded-2xl bg-white p-2 shadow-sm"
+          />
+          <p className="mt-4 text-sm uppercase tracking-[0.3em] text-[#D4AF37]">
             Trusted Land Promoter in Chennai
           </p>
           <p className="mt-4 text-sm text-white/70">
