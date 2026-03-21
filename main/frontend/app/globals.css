@@ -11,10 +11,10 @@ html {
 }
 
 body {
-  @apply bg-[#F5F7FA] text-[#1A1A1A] antialiased;
+  @apply bg-[#E6F4EA] text-[#1A1A1A] antialiased;
   background-image:
-    radial-gradient(circle at top left, rgba(201, 162, 74, 0.1), transparent 28%),
-    radial-gradient(circle at top right, rgba(46, 125, 50, 0.08), transparent 24%);
+    radial-gradient(circle at top left, rgba(46, 125, 50, 0.16), transparent 30%),
+    radial-gradient(circle at top right, rgba(201, 162, 74, 0.08), transparent 24%);
 }
 
 a {
@@ -117,6 +117,17 @@ a {
   border-color: #c9a24a;
   color: #c9a24a;
   box-shadow: 0 16px 40px rgba(30, 58, 95, 0.08);
+}
+
+.btn-orange {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-[#F97316] px-6 py-3 text-sm font-semibold text-white;
+  box-shadow: 0 14px 35px rgba(249, 115, 22, 0.3);
+}
+
+.btn-orange:hover {
+  transform: translateY(-2px) scale(1.05);
+  background: #ea580c;
+  box-shadow: 0 20px 45px rgba(249, 115, 22, 0.4);
 }
 
 @keyframes fade-up {

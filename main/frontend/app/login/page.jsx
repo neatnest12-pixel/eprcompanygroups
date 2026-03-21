@@ -75,7 +75,7 @@ export default function LoginPage() {
               type="password"
               required
             />
-            <button type="submit" className="btn-gold w-full" disabled={loading}>
+            <button type="submit" className="btn-orange w-full" disabled={loading}>
               {loading ? "Signing in..." : "Login"}
             </button>
           </form>

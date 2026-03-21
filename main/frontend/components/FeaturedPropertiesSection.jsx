@@ -5,6 +5,21 @@ import Link from "next/link";
 import { company, featuredPropertiesIntro } from "../lib/content";
 import { getStoredProperties } from "../lib/propertyStore";
 
+function tagClass(tag) {
+  switch (tag) {
+    case "FEATURED":
+      return "bg-[#C9A24A]/15 text-[#C9A24A]";
+    case "VERIFIED":
+      return "bg-[#2E7D32]/15 text-[#2E7D32]";
+    case "HOT DEAL":
+      return "bg-[#C9A24A]/12 text-[#C9A24A]";
+    case "NEW":
+      return "bg-[#1E3A5F]/10 text-[#1E3A5F]";
+    default:
+      return "bg-[#1E3A5F]/8 text-[#1E3A5F]";
+  }
+}
+
 export default function FeaturedPropertiesSection() {
   const [featured, setFeatured] = useState([]);
 
@@ -42,11 +57,21 @@ export default function FeaturedPropertiesSection() {
                 loading="lazy"
               />
               <div className="p-6">
-                {property.dealLabel ? (
-                  <span className="inline-flex rounded-full bg-[#C9A24A]/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#C9A24A]">
-                    {property.dealLabel}
-                  </span>
-                ) : null}
+                <div className="flex flex-wrap items-center gap-2">
+                  {property.dealLabel ? (
+                    <span className="inline-flex rounded-full bg-[#C9A24A]/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#C9A24A]">
+                      {property.dealLabel}
+                    </span>
+                  ) : null}
+                  {(property.tags || []).map((tag) => (
+                    <span
+                      key={tag}
+                      className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] ${tagClass(tag)}`}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
                 <p className="mt-3 text-sm font-medium text-[#2E7D32]">{property.location}</p>
                 <h3 className="mt-2 text-xl font-semibold text-[#1E3A5F]">{property.title}</h3>
                 <p className="mt-2 text-sm font-semibold text-[#C9A24A]">{property.price}</p>

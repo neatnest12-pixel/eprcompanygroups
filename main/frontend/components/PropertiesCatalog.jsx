@@ -1,27 +1,57 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { company } from "../lib/content";
+import PropertyCard from "./PropertyCard";
 import { getStoredProperties } from "../lib/propertyStore";
 
-const budgets = [
-  { label: "All Budgets", value: "all" },
-  { label: "Below Rs 50 Lakh", value: "below-50" },
-  { label: "Rs 50 Lakh - Rs 1 Cr", value: "50-100" },
-  { label: "Above Rs 1 Cr", value: "above-100" },
-  { label: "Rental Deals", value: "rental" }
+const categoryOptions = [
+  "All Categories",
+  "Plots",
+  "Houses",
+  "Villas",
+  "Apartments",
+  "Commercial",
+  "Farm lands"
 ];
 
-function matchesBudget(value, budget) {
-  return budget === "all" || value === budget;
+const bedroomOptions = ["Any", "1", "2", "3", "4+"];
+
+const amenityOptions = ["Parking", "Security", "Lift", "Gated", "Main road"];
+
+function mapTypeToCategory(type) {
+  const value = (type || "").toLowerCase();
+  if (value.includes("flat") || value.includes("apartment")) return "Apartments";
+  if (value.includes("house")) return "Houses";
+  if (value.includes("commercial")) return "Commercial";
+  if (value.includes("villa")) return "Villas";
+  if (value.includes("farm")) return "Farm lands";
+  return "Plots";
+}
+
+function parsePriceToLakh(price) {
+  if (!price) return 0;
+  const value = price.toLowerCase().replace(/,/g, "");
+  const number = parseFloat(value.match(/[\d.]+/)?.[0] || "0");
+  if (value.includes("crore")) {
+    return number * 100;
+  }
+  if (value.includes("lakh")) {
+    return number;
+  }
+  if (value.includes("/ month")) {
+    return number / 100000;
+  }
+  return number;
 }
 
 export default function PropertiesCatalog() {
   const [allProperties, setAllProperties] = useState([]);
+  const [keyword, setKeyword] = useState("");
   const [location, setLocation] = useState("All Locations");
-  const [type, setType] = useState("All Types");
-  const [budget, setBudget] = useState("all");
-  const [selectedProperty, setSelectedProperty] = useState(null);
+  const [category, setCategory] = useState("All Categories");
+  const [maxPrice, setMaxPrice] = useState(500);
+  const [bedrooms, setBedrooms] = useState("Any");
+  const [amenities, setAmenities] = useState([]);
 
   useEffect(() => {
     const syncProperties = () => {
@@ -39,192 +69,129 @@ export default function PropertiesCatalog() {
     [allProperties]
   );
 
-  const types = useMemo(
-    () => ["All Types", ...new Set(allProperties.map((property) => property.type))],
-    [allProperties]
-  );
+  const maxDatasetPrice = useMemo(() => {
+    const values = allProperties.map((property) => parsePriceToLakh(property.price));
+    return Math.max(100, ...values);
+  }, [allProperties]);
 
-  const filtered = useMemo(
-    () =>
-      allProperties.filter((property) => {
-        const locationOk = location === "All Locations" || property.location === location;
-        const typeOk = type === "All Types" || property.type === type;
-        const budgetOk = matchesBudget(property.budgetBucket, budget);
-        return locationOk && typeOk && budgetOk;
-      }),
-    [allProperties, location, type, budget]
-  );
+  useEffect(() => {
+    if (maxPrice > maxDatasetPrice) {
+      setMaxPrice(Math.ceil(maxDatasetPrice));
+    }
+  }, [maxDatasetPrice, maxPrice]);
+
+  const filtered = useMemo(() => {
+    return allProperties.filter((property) => {
+      const search = keyword.trim().toLowerCase();
+      const textMatch =
+        !search ||
+        property.title.toLowerCase().includes(search) ||
+        property.location.toLowerCase().includes(search) ||
+        property.type.toLowerCase().includes(search);
+
+      const locationOk = location === "All Locations" || property.location === location;
+      const categoryOk =
+        category === "All Categories" || mapTypeToCategory(property.type) === category;
+
+      const priceOk = parsePriceToLakh(property.price) <= Number(maxPrice);
+
+      const bedsValue = String(property.beds || "");
+      const bedsNumber = parseInt(bedsValue, 10);
+      const bedroomOk =
+        bedrooms === "Any" ||
+        (bedrooms === "4+" ? bedsNumber >= 4 : bedsValue === bedrooms);
+
+      const amenitiesOk = amenities.length
+        ? amenities.every((item) =>
+            property.amenities?.some((amenity) =>
+              amenity.toLowerCase().includes(item.toLowerCase())
+            )
+          )
+        : true;
+
+      return textMatch && locationOk && categoryOk && priceOk && bedroomOk && amenitiesOk;
+    });
+  }, [allProperties, keyword, location, category, maxPrice, bedrooms, amenities]);
+
+  const toggleAmenity = (value) => {
+    setAmenities((prev) =>
+      prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]
+    );
+  };
 
   return (
-    <>
-      <div className="card-white p-8">
-        <h2 className="text-2xl font-semibold text-[#1E3A5F]">How to use the filters</h2>
-        <p className="mt-4 text-base leading-8 text-[#6B7280]">
-          Use location if you already have a preferred growth belt such as Tambaram or
-          Guduvanchery. Use budget if you want to compare what is realistically available in your
-          comfort range. Use property type if you are specifically looking for plots, flats,
-          rentals, or commercial inventory. Filtering helps narrow the search, but our team can
-          still help you compare options that may not be obvious from the screen alone.
-        </p>
+    <div className="grid gap-8 lg:grid-cols-[300px_1fr]">
+      <aside className="card-white h-fit p-6">
+        <h2 className="text-lg font-semibold text-[#1E3A5F]">Filters</h2>
+        <div className="mt-6 space-y-4">
+          <input
+            value={keyword}
+            onChange={(event) => setKeyword(event.target.value)}
+            placeholder="Keyword"
+            className="form-input"
+          />
 
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
           <select value={location} onChange={(event) => setLocation(event.target.value)} className="form-input">
             {locations.map((item) => (
               <option key={item}>{item}</option>
             ))}
           </select>
-          <select value={budget} onChange={(event) => setBudget(event.target.value)} className="form-input">
-            {budgets.map((item) => (
-              <option key={item.value} value={item.value}>
-                {item.label}
-              </option>
-            ))}
-          </select>
-          <select value={type} onChange={(event) => setType(event.target.value)} className="form-input">
-            {types.map((item) => (
+
+          <select value={category} onChange={(event) => setCategory(event.target.value)} className="form-input">
+            {categoryOptions.map((item) => (
               <option key={item}>{item}</option>
             ))}
           </select>
-        </div>
-      </div>
 
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {filtered.map((property) => (
-          <div key={property.id} className="card-white overflow-hidden hover-lift group">
-            <img
-              src={property.images[0]}
-              alt={`${property.title} in ${property.location}`}
-              className="h-52 w-full object-cover transition duration-300 group-hover:scale-105"
-              loading="lazy"
+          <div>
+            <label className="text-xs font-semibold uppercase tracking-[0.2em] text-[#1E3A5F]">
+              Max price (₹ Lakhs)
+            </label>
+            <input
+              type="range"
+              min="0"
+              max={Math.ceil(maxDatasetPrice)}
+              value={maxPrice}
+              onChange={(event) => setMaxPrice(event.target.value)}
+              className="mt-3 w-full accent-[#F97316]"
             />
-            <div className="p-6">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="rounded-full bg-[#1E3A5F]/8 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#1E3A5F]">
-                  {property.listingMode === "rent" ? "For Rent" : "For Sale"}
-                </span>
-                {property.dealLabel ? (
-                  <span className="rounded-full bg-[#C9A24A]/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#C9A24A]">
-                    {property.dealLabel}
-                  </span>
-                ) : null}
-              </div>
-              <p className="mt-3 text-sm font-medium text-[#2E7D32]">{property.location}</p>
-              <h3 className="mt-2 text-xl font-semibold text-[#1E3A5F]">{property.title}</h3>
-              <div className="mt-3 flex flex-wrap gap-3 text-sm text-[#6B7280]">
-                <span className="rounded-full bg-[#F5F7FA] px-3 py-1 text-[#C9A24A]">{property.price}</span>
-                <span className="rounded-full bg-[#F5F7FA] px-3 py-1">{property.sizeLabel}</span>
-                <span className="rounded-full bg-[#F5F7FA] px-3 py-1">{property.type}</span>
-              </div>
-              <div className="mt-5 space-y-2">
-                <p className="text-sm leading-7 text-[#6B7280]">
-                  <span className="font-semibold text-[#1E3A5F]">Benefits:</span>{" "}
-                  {property.benefits.join(". ")}.
-                </p>
-                <p className="text-sm leading-7 text-[#6B7280]">
-                  <span className="font-semibold text-[#1E3A5F]">Facing / highlights:</span>{" "}
-                  {property.facing}
-                </p>
-              </div>
-              <div className="mt-5 flex flex-col gap-3">
-                <button type="button" onClick={() => setSelectedProperty(property)} className="link-pill text-center">
-                  View Details
-                </button>
-                <a href={company.phoneHref} className="link-pill text-center">
-                  Call Now
-                </a>
-              </div>
-            </div>
+            <p className="mt-2 text-sm text-[#6B7280]">Up to {Number(maxPrice).toFixed(1)} Lakhs</p>
           </div>
-        ))}
-      </div>
 
-      {selectedProperty ? (
-        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-[#1E3A5F]/65 p-4">
-          <div className="max-h-[90vh] w-full max-w-5xl overflow-auto rounded-[28px] bg-white shadow-[0_28px_80px_rgba(30,58,95,0.24)]">
-            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[#E5EAF1] bg-white px-6 py-4">
-              <div>
-                <p className="text-sm uppercase tracking-[0.22em] text-[#C9A24A]">Property Detail</p>
-                <h3 className="mt-1 text-2xl font-semibold text-[#1E3A5F]">{selectedProperty.title}</h3>
-              </div>
-              <button type="button" onClick={() => setSelectedProperty(null)} className="link-pill">
-                Close
-              </button>
-            </div>
+          <select value={bedrooms} onChange={(event) => setBedrooms(event.target.value)} className="form-input">
+            {bedroomOptions.map((item) => (
+              <option key={item}>{item} Bedrooms</option>
+            ))}
+          </select>
 
-            <div className="grid gap-8 p-6 lg:grid-cols-[1.05fr_0.95fr]">
-              <div className="space-y-4">
-                <img
-                  src={selectedProperty.images[0]}
-                  alt={selectedProperty.title}
-                  className="h-72 w-full rounded-[24px] object-cover"
-                />
-                <div className="grid gap-4 md:grid-cols-2">
-                  {selectedProperty.images.slice(1, 3).map((image) => (
-                    <img key={image} src={image} alt={selectedProperty.title} className="h-40 w-full rounded-[20px] object-cover" />
-                  ))}
-                </div>
-              </div>
-
-              <div className="space-y-5">
-                <div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="rounded-full bg-[#1E3A5F]/8 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#1E3A5F]">
-                      {selectedProperty.listingMode === "rent" ? "For Rent" : "For Sale"}
-                    </span>
-                    {selectedProperty.dealLabel ? (
-                      <span className="rounded-full bg-[#C9A24A]/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#C9A24A]">
-                        {selectedProperty.dealLabel}
-                      </span>
-                    ) : null}
-                  </div>
-                  <p className="mt-3 text-sm font-medium text-[#2E7D32]">{selectedProperty.location}</p>
-                  <p className="mt-3 text-2xl font-semibold text-[#C9A24A]">{selectedProperty.price}</p>
-                </div>
-
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="surface-soft p-4">
-                    <p className="text-xs uppercase tracking-[0.16em] text-[#2E7D32]">Size</p>
-                    <p className="mt-2 font-semibold text-[#1E3A5F]">{selectedProperty.sizeLabel}</p>
-                  </div>
-                  <div className="surface-soft p-4">
-                    <p className="text-xs uppercase tracking-[0.16em] text-[#2E7D32]">Facing / format</p>
-                    <p className="mt-2 font-semibold text-[#1E3A5F]">{selectedProperty.facing}</p>
-                  </div>
-                </div>
-
-                <p className="text-base leading-8 text-[#6B7280]">{selectedProperty.overview}</p>
-                <p className="text-base leading-8 text-[#6B7280]">
-                  <span className="font-semibold text-[#1E3A5F]">Best use:</span> {selectedProperty.useCase}
-                </p>
-                <p className="text-base leading-8 text-[#6B7280]">
-                  <span className="font-semibold text-[#1E3A5F]">Investment potential:</span>{" "}
-                  {selectedProperty.investmentPotential}
-                </p>
-
-                <div>
-                  <h4 className="text-lg font-semibold text-[#1E3A5F]">Key highlights</h4>
-                  <div className="mt-3 flex flex-wrap gap-3">
-                    {selectedProperty.keyFeatures.map((item) => (
-                      <span key={item} className="pill-chip">
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-3">
-                  <a href={company.phoneHref} className="btn-gold">
-                    Call {company.phone}
-                  </a>
-                  <a href={company.whatsappHref} className="btn-outline">
-                    WhatsApp
-                  </a>
-                </div>
-              </div>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#1E3A5F]">Amenities</p>
+            <div className="mt-3 space-y-2">
+              {amenityOptions.map((item) => (
+                <label key={item} className="flex items-center gap-2 text-sm text-[#6B7280]">
+                  <input
+                    type="checkbox"
+                    checked={amenities.includes(item)}
+                    onChange={() => toggleAmenity(item)}
+                  />
+                  {item}
+                </label>
+              ))}
             </div>
           </div>
         </div>
-      ) : null}
-    </>
+      </aside>
+
+      <div className="space-y-6">
+        <p className="text-sm font-semibold text-[#1E3A5F]">
+          {filtered.length} properties found
+        </p>
+        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          {filtered.map((property) => (
+            <PropertyCard key={property.id} property={property} />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }

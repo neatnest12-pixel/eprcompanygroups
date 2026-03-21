@@ -89,7 +89,7 @@ export default function PropertyDetailPage({ params }) {
                 <span className="font-semibold text-[#1E3A5F]">Best use:</span> {property.useCase}
               </div>
               <div className="mt-6 flex flex-col gap-3">
-                <a href={company.phoneHref} className="btn-gold w-full">
+                <a href={company.phoneHref} className="btn-orange w-full">
                   Call {company.phone}
                 </a>
                 <a href={company.whatsappHref} className="btn-outline w-full">
@@ -207,7 +207,7 @@ export default function PropertyDetailPage({ params }) {
               the pricing.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href={company.phoneHref} className="btn-gold">
+              <a href={company.phoneHref} className="btn-orange">
                 Call {company.phone}
               </a>
               <a href={company.secondaryPhoneHref} className="btn-outline">

@@ -48,7 +48,7 @@ export default function ContactForm({ redirectToWhatsApp = false }) {
       />
       <button
         type="submit"
-        className="btn-gold w-full"
+        className="btn-orange w-full"
       >
         Send Message
       </button>
