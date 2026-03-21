@@ -42,8 +42,8 @@ export default function PropertiesCatalog() {
   return (
     <>
       <div className="card-white p-8">
-        <h2 className="text-2xl font-semibold text-emerald-950">How to use the filters</h2>
-        <p className="mt-4 text-base leading-8 text-emerald-800">
+        <h2 className="text-2xl font-semibold text-[#1E3A5F]">How to use the filters</h2>
+        <p className="mt-4 text-base leading-8 text-[#6B7280]">
           Use location if you already have a preferred growth belt such as Tambaram or
           Guduvanchery. Use budget if you want to compare what is realistically available in your
           comfort range. Use property type if you are specifically looking for DTCP plots,
@@ -56,7 +56,7 @@ export default function PropertiesCatalog() {
           <select
             value={location}
             onChange={(event) => setLocation(event.target.value)}
-            className="rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 focus:outline-none"
+            className="form-input"
           >
             {locations.map((item) => (
               <option key={item}>{item}</option>
@@ -65,7 +65,7 @@ export default function PropertiesCatalog() {
           <select
             value={budget}
             onChange={(event) => setBudget(event.target.value)}
-            className="rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 focus:outline-none"
+            className="form-input"
           >
             {budgets.map((item) => (
               <option key={item}>{item}</option>
@@ -74,7 +74,7 @@ export default function PropertiesCatalog() {
           <select
             value={type}
             onChange={(event) => setType(event.target.value)}
-            className="rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 focus:outline-none"
+            className="form-input"
           >
             {types.map((item) => (
               <option key={item}>{item}</option>
@@ -85,41 +85,41 @@ export default function PropertiesCatalog() {
 
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {filtered.map((property) => (
-          <div key={property.id} className="card-white overflow-hidden hover-lift">
+          <div key={property.id} className="card-white overflow-hidden hover-lift group">
             <img
               src={property.images[0]}
               alt={`${property.title} in ${property.location}`}
-              className="h-52 w-full object-cover"
+              className="h-52 w-full object-cover transition duration-300 group-hover:scale-105"
               loading="lazy"
             />
             <div className="p-6">
-              <p className="text-sm font-medium text-emerald-700">{property.location}</p>
-              <h3 className="mt-2 text-xl font-semibold text-emerald-950">{property.title}</h3>
-              <div className="mt-3 flex flex-wrap gap-3 text-sm text-emerald-800">
-                <span className="rounded-full bg-emerald-50 px-3 py-1">{property.price}</span>
-                <span className="rounded-full bg-emerald-50 px-3 py-1">{property.plotSize}</span>
-                <span className="rounded-full bg-emerald-50 px-3 py-1">{property.type}</span>
+              <p className="text-sm font-medium text-[#2E7D32]">{property.location}</p>
+              <h3 className="mt-2 text-xl font-semibold text-[#1E3A5F]">{property.title}</h3>
+              <div className="mt-3 flex flex-wrap gap-3 text-sm text-[#6B7280]">
+                <span className="rounded-full bg-[#F5F7FA] px-3 py-1 text-[#C9A24A]">{property.price}</span>
+                <span className="rounded-full bg-[#F5F7FA] px-3 py-1">{property.plotSize}</span>
+                <span className="rounded-full bg-[#F5F7FA] px-3 py-1">{property.type}</span>
               </div>
               <div className="mt-5 space-y-2">
-                <p className="text-sm leading-7 text-emerald-800">
-                  <span className="font-semibold text-emerald-950">Benefits:</span>{" "}
+                <p className="text-sm leading-7 text-[#6B7280]">
+                  <span className="font-semibold text-[#1E3A5F]">Benefits:</span>{" "}
                   {property.benefits.join(". ")}.
                 </p>
-                <p className="text-sm leading-7 text-emerald-800">
-                  <span className="font-semibold text-emerald-950">Investment note:</span>{" "}
+                <p className="text-sm leading-7 text-[#6B7280]">
+                  <span className="font-semibold text-[#1E3A5F]">Investment note:</span>{" "}
                   {property.investmentPotential}
                 </p>
               </div>
               <div className="mt-5 flex flex-col gap-3">
                 <Link
                   href={`/properties/${property.id}`}
-                  className="rounded-full border border-emerald-200 px-4 py-2 text-center text-sm font-semibold text-emerald-950 transition hover:bg-emerald-50"
+                  className="link-pill text-center"
                 >
                   View Details
                 </Link>
                 <a
                   href={company.phoneHref}
-                  className="rounded-full border border-emerald-200 px-4 py-2 text-center text-sm font-semibold text-emerald-950 transition hover:bg-emerald-50"
+                  className="link-pill text-center"
                 >
                   Call Now
                 </a>

@@ -20,28 +20,28 @@ export default function ContactForm({ redirectToWhatsApp = false }) {
   return (
     <form onSubmit={handleSubmit} className="card-white space-y-4 p-6">
       <input
-        className="w-full rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 placeholder-emerald-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40"
+        className="form-input"
         placeholder="Name"
         name="name"
         type="text"
         required
       />
       <input
-        className="w-full rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 placeholder-emerald-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40"
+        className="form-input"
         placeholder="Phone"
         name="phone"
         type="tel"
         required
       />
       <input
-        className="w-full rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 placeholder-emerald-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40"
+        className="form-input"
         placeholder="Email"
         name="email"
         type="email"
         required
       />
       <textarea
-        className="h-32 w-full rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 placeholder-emerald-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40"
+        className="form-input h-32"
         placeholder="Message"
         name="message"
         required
@@ -53,7 +53,7 @@ export default function ContactForm({ redirectToWhatsApp = false }) {
         Send Message
       </button>
       {submitted ? (
-        <p className="text-sm text-emerald-700">Thanks! We will contact you shortly.</p>
+        <p className="text-sm text-[#2E7D32]">Thanks! We will contact you shortly.</p>
       ) : null}
     </form>
   );

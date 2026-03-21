@@ -47,23 +47,23 @@ export default function LoginPage() {
       <div className="mx-auto max-w-xl">
         <div className="card-white p-8">
           <p className="section-subtitle">Admin Login</p>
-          <h1 className="mt-3 text-3xl font-semibold text-emerald-950">
+          <h1 className="mt-3 text-3xl font-semibold text-[#1E3A5F]">
             Sign in to manage listings
           </h1>
-          <p className="mt-4 text-sm text-emerald-800">
+          <p className="mt-4 text-sm text-[#6B7280]">
             Use the admin credentials configured in your server environment.
           </p>
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             <input
-              className="w-full rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 placeholder-emerald-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40"
+              className="form-input"
               placeholder="Email"
               name="email"
               type="email"
               required
             />
             <input
-              className="w-full rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 placeholder-emerald-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40"
+              className="form-input"
               placeholder="Password"
               name="password"
               type="password"
@@ -77,7 +77,7 @@ export default function LoginPage() {
           {status.message ? (
             <p
               className={`mt-4 text-sm ${
-                status.type === "success" ? "text-emerald-700" : "text-red-600"
+                status.type === "success" ? "text-[#2E7D32]" : "text-red-600"
               }`}
             >
               {status.message}

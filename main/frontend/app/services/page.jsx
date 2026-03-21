@@ -27,7 +27,7 @@ export default function ServicesPage() {
           <h1 className="section-title mt-3">
             Professional real estate support for buyers who want more than a sales pitch.
           </h1>
-          <p className="mt-5 max-w-4xl text-base leading-8 text-white/82">
+          <p className="mt-5 max-w-4xl text-base leading-8 text-[#6B7280]">
             Richman Maker supports Chennai land buyers with guidance that is practical, transparent,
             and aligned with real goals. Whether you are buying your first plot, comparing locations
             for appreciation, or trying to move through documentation and registration without costly
@@ -42,14 +42,14 @@ export default function ServicesPage() {
             return (
               <div key={service.title} className="card-white p-8 hover-lift">
                 <div className="flex items-start gap-4">
-                  <div className="rounded-2xl bg-[#D4AF37]/15 p-3">
-                    <Icon className="h-6 w-6 text-emerald-900" />
+                  <div className="rounded-2xl bg-[#C9A24A]/12 p-3">
+                    <Icon className="h-6 w-6 text-[#1E3A5F]" />
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-2xl font-semibold text-emerald-950">{service.title}</h2>
+                    <h2 className="text-2xl font-semibold text-[#1E3A5F]">{service.title}</h2>
                     <div className="mt-4 space-y-4">
                       {service.paragraphs.map((paragraph) => (
-                        <p key={paragraph} className="text-base leading-8 text-emerald-800">
+                        <p key={paragraph} className="text-base leading-8 text-[#6B7280]">
                           {paragraph}
                         </p>
                       ))}
@@ -62,12 +62,12 @@ export default function ServicesPage() {
         </div>
 
         <div className="card-white p-8">
-          <h2 className="text-2xl font-semibold text-emerald-950">
+          <h2 className="text-2xl font-semibold text-[#1E3A5F]">
             Why professional guidance matters in real estate
           </h2>
           <div className="mt-5 space-y-4">
             {professionalGuidanceText.map((paragraph) => (
-              <p key={paragraph} className="text-base leading-8 text-emerald-800">
+              <p key={paragraph} className="text-base leading-8 text-[#6B7280]">
                 {paragraph}
               </p>
             ))}
@@ -75,10 +75,10 @@ export default function ServicesPage() {
         </div>
 
         <div className="card-white p-8">
-          <h2 className="text-2xl font-semibold text-emerald-950">
+          <h2 className="text-2xl font-semibold text-[#1E3A5F]">
             Need help choosing the right service?
           </h2>
-          <p className="mt-4 text-base leading-8 text-emerald-800">
+          <p className="mt-4 text-base leading-8 text-[#6B7280]">
             Some buyers need investment consulting first. Others need help with site visits or
             document clarity before they feel comfortable. Tell us where you are in the process and
             Richman Maker will guide you toward the right next step.
@@ -87,10 +87,10 @@ export default function ServicesPage() {
             <a href={company.phoneHref} className="btn-gold">
               Call {company.phone}
             </a>
-            <Link href="/contact" className="btn-outline border-emerald-200 text-emerald-950">
+            <Link href="/contact" className="btn-outline">
               Contact Our Team
             </Link>
-            <Link href="/properties" className="btn-outline border-emerald-200 text-emerald-950">
+            <Link href="/properties" className="btn-outline">
               View Properties
             </Link>
           </div>

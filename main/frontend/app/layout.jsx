@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Inter, Poppins } from "next/font/google";
+import { Inter, Playfair_Display, Poppins } from "next/font/google";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import FloatingWhatsApp from "../components/FloatingWhatsApp";
@@ -11,6 +11,11 @@ const poppins = Poppins({
   weight: ["500", "600", "700", "800"],
   variable: "--font-poppins"
 });
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-display"
+});
 
 export const metadata = {
   title: "Richman Maker | Land Promoter in Chennai",
@@ -21,7 +26,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
+    <html lang="en" className={`${inter.variable} ${poppins.variable} ${playfair.variable}`}>
       <body className="font-[var(--font-poppins)]">
         <Navbar />
         <main>{children}</main>
