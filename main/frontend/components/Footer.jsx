@@ -11,8 +11,11 @@ export default function Footer() {
             alt="ERP Group Company Richman Maker Land Promoters logo"
             className="h-24 w-auto rounded-2xl bg-white p-2 shadow-sm"
           />
-          <p className="mt-4 text-sm uppercase tracking-[0.3em] text-[#C9A24A]">
-            Trusted Land Promoter in Chennai
+          <p className="mt-4 text-sm font-semibold uppercase tracking-[0.22em] text-white/80">
+            {company.parentName}
+          </p>
+          <p className="mt-2 text-xl font-semibold text-[#C9A24A]">
+            {company.brandName} - {company.category}
           </p>
           <div className="gold-divider mt-5" />
           <p className="mt-4 max-w-md text-sm leading-7 text-white/72">
@@ -69,7 +72,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10 py-4 text-center text-xs text-white/60">
-        (c) 2026 Richman Maker. All rights reserved.
+        (c) 2026 {company.parentName}. {company.brandName} - {company.category}.
       </div>
     </footer>
   );

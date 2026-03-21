@@ -1,6 +1,9 @@
 export const company = {
+  parentName: "ERP Group Company",
+  brandName: "Richman Maker",
+  category: "Land Promoters",
   name: "Richman Maker",
-  tagline: "Trusted Land Promoter in Chennai",
+  tagline: "Premium Land Promoters in Chennai",
   phone: "+91 89394 27799",
   phoneHref: "tel:+918939427799",
   whatsappHref:

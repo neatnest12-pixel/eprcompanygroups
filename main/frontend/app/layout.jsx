@@ -18,10 +18,10 @@ const playfair = Playfair_Display({
 });
 
 export const metadata = {
-  title: "Richman Maker | Land Promoter in Chennai",
+  title: "ERP Group Company | Richman Maker | Land Promoters in Chennai",
   description:
-    "Richman Maker helps buyers discover plots in Tambaram, Guduvanchery, Vandalur, and Chengalpattu with trusted documentation support and investment-focused guidance.",
-  keywords: "real estate, property buying, property selling, Chennai real estate"
+    "ERP Group Company presents Richman Maker, its land promoter brand in Chennai, helping buyers discover plots in Tambaram, Guduvanchery, Vandalur, and Chengalpattu with trusted guidance.",
+  keywords: "ERP Group Company, Richman Maker, real estate, property buying, property selling, Chennai real estate"
 };
 
 export default function RootLayout({ children }) {

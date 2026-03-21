@@ -16,11 +16,11 @@ import {
 import { properties } from "../lib/properties";
 
 export const metadata = {
-  title: "Richman Maker | Land Promoter in Chennai | Plots in Tambaram and Guduvanchery",
+  title: "ERP Group Company | Richman Maker | Premium Land Promoters in Chennai",
   description:
-    "Richman Maker helps buyers find DTCP and growth-focused plots in Tambaram, Guduvanchery, Vandalur, and Chengalpattu with trusted guidance, documentation clarity, and strong investment insight.",
+    "ERP Group Company presents Richman Maker, its premium land promoter brand in Chennai, helping buyers find DTCP and growth-focused plots in Tambaram, Guduvanchery, Vandalur, and Chengalpattu.",
   keywords:
-    "plots in Tambaram, land for sale Chennai, DTCP plots Guduvanchery, land promoter in Chennai, Chengalpattu plots"
+    "ERP Group Company, Richman Maker, plots in Tambaram, land for sale Chennai, DTCP plots Guduvanchery, land promoter in Chennai, Chengalpattu plots"
 };
 
 const featured = properties.slice(0, 6);
@@ -41,23 +41,24 @@ export default function HomePage() {
         <div className="container-shell relative z-10 flex min-h-screen flex-col justify-center py-24">
           <div className="max-w-4xl fade-in">
             <p className="mb-5 text-sm font-semibold uppercase tracking-[0.42em] text-[#C9A24A]">
-              Premium Chennai Land Investments
+              {company.category}
             </p>
             <h1
               className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Buy land in Chennai with more clarity, less confusion, and stronger long-term confidence.
+              {company.parentName}
             </h1>
             <h2 className="mt-4 text-2xl font-semibold text-[#C9A24A] sm:text-3xl">
-              Richman Maker
+              {company.brandName}
             </h2>
             <p className="mt-6 max-w-3xl text-base leading-8 text-white/85 sm:text-lg">
+              {company.tagline}.{" "}
               If you are searching for plots in Tambaram, DTCP plots in Guduvanchery,
               land for sale in Chennai outskirts, or growth-focused investments near
-              Vandalur and Chengalpattu, Richman Maker helps you move forward with better
+              Vandalur and Chengalpattu, {company.brandName} helps you move forward with better
               location insight, clearer documentation support, and a buying process built
-              around trust.
+              around trust under the guidance of {company.parentName}.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3 text-sm text-white/85">

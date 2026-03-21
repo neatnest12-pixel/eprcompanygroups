@@ -48,9 +48,11 @@ export default function Navbar() {
           />
           <div className="hidden sm:block">
             <p className="text-sm font-semibold uppercase tracking-[0.08em] text-[#1E3A5F]">
-              EPR Group Company
+              {company.parentName}
             </p>
-            <p className="text-xs tracking-[0.24em] text-[#6B7280]">Richman Maker</p>
+            <p className="text-sm font-bold tracking-[0.18em] text-[#C9A24A]">
+              {company.brandName}
+            </p>
           </div>
         </Link>
 

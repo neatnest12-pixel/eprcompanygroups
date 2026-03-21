@@ -2,11 +2,11 @@ import Link from "next/link";
 import { aboutSections, company, internalLinkSuggestions } from "../../lib/content";
 
 export const metadata = {
-  title: "About Richman Maker | Chennai Land Promoter | Tambaram and Guduvanchery Plots",
+  title: "About ERP Group Company | Richman Maker | Chennai Land Promoters",
   description:
-    "Learn about Richman Maker, a Chennai land promoter focused on clear documentation, trusted buyer guidance, and growth-driven real estate investments in Tambaram, Guduvanchery, Vandalur, and Chengalpattu.",
+    "Learn about ERP Group Company and Richman Maker, its Chennai land promoter division focused on clear documentation, trusted buyer guidance, and growth-driven real estate investments.",
   keywords:
-    "about Richman Maker, Chennai land promoter, plots in Tambaram, DTCP plots Guduvanchery"
+    "ERP Group Company, Richman Maker, Chennai land promoter, plots in Tambaram, DTCP plots Guduvanchery"
 };
 
 export default function AboutPage() {
@@ -14,10 +14,16 @@ export default function AboutPage() {
     <section className="container-shell section-shell">
       <div className="space-y-10">
         <div className="card-white p-10">
-          <p className="section-subtitle">About Richman Maker</p>
+          <p className="section-subtitle">About ERP Group Company and Richman Maker</p>
           <h1 className="mt-3 text-4xl font-semibold text-[#1E3A5F]">
             Built to help Chennai land buyers move with more confidence.
           </h1>
+          <div className="mt-6 rounded-[24px] border border-[#C9A24A]/20 bg-[#F5F7FA] p-6">
+            <p className="text-base leading-8 text-[#1E3A5F]">
+              <span className="font-semibold">{company.parentName}</span> is the parent brand, and{" "}
+              <span className="font-semibold text-[#C9A24A]">{company.brandName}</span> is its real estate division.
+            </p>
+          </div>
           <div className="mt-6 space-y-5">
             {aboutSections.story.map((paragraph) => (
               <p key={paragraph} className="section-copy">
