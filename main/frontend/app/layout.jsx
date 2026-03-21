@@ -13,9 +13,9 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "EPR Group Company | Buy & Sell Properties | Real Estate Experts",
+  title: "Richman Maker | Land Promoter in Chennai",
   description:
-    "Find your dream property with EPR Group Company. Trusted real estate solutions, verified listings, and expert guidance.",
+    "Richman Maker helps buyers discover plots in Tambaram, Guduvanchery, Vandalur, and Chengalpattu with trusted documentation support and investment-focused guidance.",
   keywords: "real estate, property buying, property selling, Chennai real estate"
 };
 

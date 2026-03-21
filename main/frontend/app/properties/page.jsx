@@ -1,116 +1,77 @@
-"use client";
+import PropertiesCatalog from "../../components/PropertiesCatalog";
 
-import { useMemo, useState } from "react";
-import Link from "next/link";
-import { properties } from "../../lib/properties";
-
-const locations = ["All", "ECR, Chennai", "OMR, Chennai", "Siruseri, Chennai", "Padur, Chennai"];
-const types = ["All", "Villa", "Apartment", "Plot"];
-const budgets = ["All", "Under Rs 60 Lakh", "Rs 60L - Rs 1Cr", "Rs 1Cr+"];
-
-function matchesBudget(price, budget) {
-  if (budget === "All") return true;
-  if (budget === "Under Rs 60 Lakh") return price.includes("45") || price.includes("55");
-  if (budget === "Rs 60L - Rs 1Cr") return price.includes("78") || price.includes("92");
-  if (budget === "Rs 1Cr+") return price.includes("1.25");
-  return true;
-}
+export const metadata = {
+  title: "Plots in Tambaram, Guduvanchery and Chennai | Richman Maker Properties",
+  description:
+    "Browse plots in Tambaram, Guduvanchery, Vandalur, and Chengalpattu with Richman Maker. Explore price ranges, plot sizes, benefits, and investment potential for Chennai land buyers.",
+  keywords:
+    "plots in Tambaram, DTCP plots Guduvanchery, land for sale Chennai, Chengalpattu plots, Vandalur plots"
+};
 
 export default function PropertiesPage() {
-  const [location, setLocation] = useState("All");
-  const [type, setType] = useState("All");
-  const [budget, setBudget] = useState("All");
-
-  const filtered = useMemo(
-    () =>
-      properties.filter((property) => {
-        const matchLocation = location === "All" || property.location === location;
-        const matchType = type === "All" || property.type === type;
-        const matchBudget = matchesBudget(property.price, budget);
-        return matchLocation && matchType && matchBudget;
-      }),
-    [location, type, budget]
-  );
-
   return (
     <section className="container-shell section-shell">
-      <div className="flex flex-col gap-10">
+      <div className="space-y-10">
         <div>
-          <p className="section-subtitle">Properties</p>
-          <h1 className="section-title mt-3">Verified Listings</h1>
+          <p className="section-subtitle">Property Listings</p>
+          <h1 className="section-title mt-3">
+            Verified plot opportunities across Chennai's most searched growth locations
+          </h1>
+          <p className="mt-5 max-w-5xl text-base leading-8 text-white/82">
+            Buyers searching for plots in Tambaram, land for sale in Chennai, DTCP plots in
+            Guduvanchery, and plotted investments near Vandalur or Chengalpattu usually want three
+            things: location growth, legal comfort, and a price point that still leaves room for
+            appreciation. This properties page is built around that exact search behavior. The
+            listings below are presented with practical details such as location, price range, plot
+            size, buyer benefits, and an investment-focused explanation so you can compare more
+            intelligently before you book a site visit.
+          </p>
         </div>
 
-        <div className="card-white grid gap-4 p-6 md:grid-cols-3">
-          <select
-            value={location}
-            onChange={(event) => setLocation(event.target.value)}
-            className="rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 focus:outline-none"
-          >
-            {locations.map((item) => (
-              <option key={item} className="text-[#0B5D3B]">
-                {item}
-              </option>
-            ))}
-          </select>
-          <select
-            value={type}
-            onChange={(event) => setType(event.target.value)}
-            className="rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 focus:outline-none"
-          >
-            {types.map((item) => (
-              <option key={item} className="text-[#0B5D3B]">
-                {item}
-              </option>
-            ))}
-          </select>
-          <select
-            value={budget}
-            onChange={(event) => setBudget(event.target.value)}
-            className="rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm text-emerald-950 focus:outline-none"
-          >
-            {budgets.map((item) => (
-              <option key={item} className="text-[#0B5D3B]">
-                {item}
-              </option>
-            ))}
-          </select>
+        <PropertiesCatalog />
+
+        <div className="card-white p-8">
+          <h2 className="text-2xl font-semibold text-emerald-950">Why our properties are better</h2>
+          <div className="mt-5 space-y-4">
+            <p className="text-base leading-8 text-emerald-800">
+              Many buyers are not simply looking for land. They are looking for land that feels safe
+              to buy, easy to understand, and sensible to hold. That is why Richman Maker focuses on
+              property opportunities that match real buyer priorities such as legal awareness,
+              location growth, approach road quality, and long-term resale psychology.
+            </p>
+            <p className="text-base leading-8 text-emerald-800">
+              We also present property details in a more useful way. Instead of just quoting a rate,
+              we explain why a location matters, who the likely buyer profile is, and what kind of
+              investment logic supports the purchase. That helps clients compare properties based on
+              actual value rather than excitement alone.
+            </p>
+          </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {filtered.map((property) => (
-            <div key={property.id} className="card-white overflow-hidden hover-lift">
-              <img
-                src={property.images[0]}
-                alt={`${property.title} property`}
-                className="h-52 w-full object-cover"
-                loading="lazy"
-              />
-              <div className="p-5">
-                <p className="text-sm text-emerald-700/70">{property.location}</p>
-                <h3 className="mt-2 text-lg font-semibold text-emerald-950">
-                  {property.title}
-                </h3>
-                <div className="mt-3 flex items-center justify-between text-sm text-emerald-700">
-                  <span>{property.type}</span>
-                  <span className="font-semibold text-emerald-900">{property.price}</span>
-                </div>
-                <div className="mt-4 flex flex-col gap-2">
-                  <Link
-                    href={`/properties/${property.id}`}
-                    className="btn-outline w-full text-center text-emerald-950 border-emerald-200"
-                  >
-                    View Details
-                  </Link>
-                  <a
-                    href="tel:+918939427799"
-                    className="btn-outline w-full text-center text-emerald-950 border-emerald-200"
-                  >
-                    Call Now
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="card-white p-8">
+          <h2 className="text-2xl font-semibold text-emerald-950">
+            Investment benefits of plots vs flats
+          </h2>
+          <div className="mt-5 space-y-4">
+            <p className="text-base leading-8 text-emerald-800">
+              Plots often appeal to buyers who want maximum flexibility. You can hold land for future
+              appreciation, build when the time is right, or keep the asset as part of a long-term
+              family strategy. Flats may offer immediate usage, but plots give you more control over
+              timing, design, and future decision-making.
+            </p>
+            <p className="text-base leading-8 text-emerald-800">
+              In growth corridors such as Tambaram, Guduvanchery, Vandalur, and Chengalpattu, land
+              also carries a different kind of upside. When surrounding infrastructure improves and
+              residential activity increases, plotted assets can become significantly more desirable,
+              especially if entry was made before broader price acceleration.
+            </p>
+            <p className="text-base leading-8 text-emerald-800">
+              Flats are often easier to compare, but plots are often better for buyers who care about
+              long-term appreciation, lower dependency on building management, and the freedom to
+              develop later. That is one reason land continues to attract serious investors across
+              Chennai outskirts.
+            </p>
+          </div>
         </div>
       </div>
     </section>
