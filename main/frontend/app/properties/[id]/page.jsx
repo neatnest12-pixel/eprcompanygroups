@@ -19,9 +19,9 @@ export function generateMetadata({ params }) {
   }
 
   return {
-    title: `${property.title} | ${property.location} | Richman Maker`,
+    title: `${property.title} | ${property.location} | ERP Group Company | Richman Maker`,
     description: `${property.title} in ${property.location}. ${property.investmentPotential}`,
-    keywords: `plots in ${property.location.split(",")[0]}, ${property.type}, land for sale Chennai`
+    keywords: `${property.location.split(",")[0]} property, ${property.type}, land for sale Chennai, Richman Maker`
   };
 }
 
@@ -59,6 +59,11 @@ export default function PropertyDetailPage({ params }) {
 
           <div className="space-y-6">
             <div className="card-white p-8">
+              {property.dealLabel ? (
+                <span className="inline-flex rounded-full bg-[#C9A24A]/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#C9A24A]">
+                  {property.dealLabel}
+                </span>
+              ) : null}
               <p className="text-sm font-medium text-[#2E7D32]">{property.location}</p>
               <h1 className="mt-2 text-4xl font-semibold text-[#1E3A5F]">{property.title}</h1>
               <p className="mt-3 text-xl font-semibold text-[#C9A24A]">{property.price}</p>
@@ -68,21 +73,24 @@ export default function PropertyDetailPage({ params }) {
                   <p className="mt-2 font-semibold text-[#1E3A5F]">{property.type}</p>
                 </div>
                 <div className="surface-soft p-4">
-                  <p className="text-xs uppercase tracking-[0.2em] text-[#2E7D32]">Plot Size</p>
-                  <p className="mt-2 font-semibold text-[#1E3A5F]">{property.plotSize}</p>
+                  <p className="text-xs uppercase tracking-[0.2em] text-[#2E7D32]">Size</p>
+                  <p className="mt-2 font-semibold text-[#1E3A5F]">{property.sizeLabel}</p>
                 </div>
                 <div className="surface-soft p-4">
                   <p className="text-xs uppercase tracking-[0.2em] text-[#2E7D32]">Sq Ft</p>
                   <p className="mt-2 font-semibold text-[#1E3A5F]">{property.sqft}</p>
                 </div>
                 <div className="surface-soft p-4">
-                  <p className="text-xs uppercase tracking-[0.2em] text-[#2E7D32]">Use Case</p>
-                  <p className="mt-2 font-semibold text-[#1E3A5F]">Investment and future construction</p>
+                  <p className="text-xs uppercase tracking-[0.2em] text-[#2E7D32]">Facing / format</p>
+                  <p className="mt-2 font-semibold text-[#1E3A5F]">{property.facing}</p>
                 </div>
+              </div>
+              <div className="mt-4 rounded-2xl border border-[#C9A24A]/20 bg-[#F5F7FA] p-4 text-sm text-[#6B7280]">
+                <span className="font-semibold text-[#1E3A5F]">Best use:</span> {property.useCase}
               </div>
               <div className="mt-6 flex flex-col gap-3">
                 <a href={company.phoneHref} className="btn-gold w-full">
-                  Call Now
+                  Call {company.phone}
                 </a>
                 <a href={company.whatsappHref} className="btn-outline w-full">
                   WhatsApp for Site Visit
@@ -201,6 +209,9 @@ export default function PropertyDetailPage({ params }) {
             <div className="mt-6 flex flex-wrap gap-3">
               <a href={company.phoneHref} className="btn-gold">
                 Call {company.phone}
+              </a>
+              <a href={company.secondaryPhoneHref} className="btn-outline">
+                Call {company.secondaryPhone}
               </a>
               <a href={company.whatsappHref} className="btn-outline">
                 WhatsApp to Book Visit

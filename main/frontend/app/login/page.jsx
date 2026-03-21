@@ -11,7 +11,8 @@ export default function LoginPage() {
     setLoading(true);
     setStatus({ type: "", message: "" });
 
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const payload = {
       email: formData.get("email"),
       password: formData.get("password")
@@ -31,7 +32,7 @@ export default function LoginPage() {
 
       window.localStorage.setItem("erp-admin-auth", JSON.stringify(data));
       setStatus({ type: "success", message: "Login successful. You can now manage listings." });
-      event.currentTarget.reset();
+      form.reset();
     } catch (error) {
       setStatus({
         type: "error",

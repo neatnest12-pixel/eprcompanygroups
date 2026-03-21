@@ -4,11 +4,28 @@ export const company = {
   category: "Land Promoters",
   name: "Richman Maker",
   tagline: "Premium Land Promoters in Chennai",
-  phone: "+91 89394 27799",
-  phoneHref: "tel:+918939427799",
+  phone: "+91 72990 07799",
+  phoneHref: "tel:+917299007799",
+  secondaryPhone: "+91 89394 27799",
+  secondaryPhoneHref: "tel:+918939427799",
+  phoneDisplay: "+91 72990 07799 / +91 89394 27799",
   whatsappHref:
     "https://wa.me/918939427799?text=Hi%2C%20I%27m%20interested%20in%20your%20property%20services",
   address: "Tambaram, Chennai, Tamil Nadu"
+};
+
+export const heroDeal = {
+  title: "10800 sq.ft Landmark Land Deal",
+  subtitle: "Premium Chennai investment showcase",
+  location: "OMR Growth Corridor, Chennai",
+  summary:
+    "A large-format land opportunity positioned for buyers who want scale, frontage value, and a premium entry in a fast-moving corridor.",
+  highlights: [
+    "10800 sq.ft premium parcel",
+    "Builder-grade frontage potential",
+    "Strong upside for land banking and development"
+  ],
+  cta: "Call for direct pricing"
 };
 
 export const homeTrustParagraphs = [

@@ -1,718 +1,570 @@
+const gallery = {
+  landA:
+    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+  landB:
+    "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1200&q=80",
+  landC:
+    "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=80",
+  flatA:
+    "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80",
+  flatB:
+    "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+  flatC:
+    "https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1200&q=80",
+  villaA:
+    "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80",
+  road:
+    "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1200&q=80"
+};
+
+function plotFaq(location) {
+  return [
+    {
+      question: `Why is ${location} attractive for buyers?`,
+      answer:
+        `${location} continues to attract buyers because it combines location growth, search visibility, and stronger future resale confidence.`
+    },
+    {
+      question: "Is this good for long-term appreciation?",
+      answer:
+        "Yes. Well-located plotted assets generally work well for buyers who want flexibility, future construction control, and capital growth."
+    },
+    {
+      question: "Do you support the paperwork and registration flow?",
+      answer:
+        "Yes. We help buyers from inquiry to site visit, documentation review, booking, and registration coordination."
+    },
+    {
+      question: "Can I book a site visit quickly?",
+      answer:
+        "Yes. Serious buyers can arrange visits and next-step discussions directly with our team."
+    },
+    {
+      question: "Will you explain the market comparison clearly?",
+      answer:
+        "Yes. We help buyers understand what makes the entry price strong compared to surrounding market activity."
+    }
+  ];
+}
+
+function rentalFaq(typeLabel) {
+  return [
+    {
+      question: `Is this ${typeLabel.toLowerCase()} suitable for immediate move-in?`,
+      answer:
+        "Yes. We can help confirm current readiness, furnishing level, and visit timing before you proceed."
+    },
+    {
+      question: "Can you arrange a viewing?",
+      answer:
+        "Yes. Viewings can be coordinated around current occupancy or owner availability."
+    },
+    {
+      question: "Will rental terms be explained clearly?",
+      answer:
+        "Yes. We help clarify rent, advance, and agreement-stage expectations before commitment."
+    },
+    {
+      question: "Is this better for families or professionals?",
+      answer:
+        "That depends on the exact inventory, but we help match the property to your lifestyle, commute, and space needs."
+    },
+    {
+      question: "Can I compare multiple options in the same area?",
+      answer:
+        "Yes. We can help shortlist the strongest available options for your budget and preference."
+    }
+  ];
+}
+
+function property({
+  id,
+  title,
+  location,
+  type,
+  listingMode,
+  budgetBucket,
+  featured = false,
+  price,
+  sizeLabel,
+  sqft,
+  facing,
+  useCase,
+  dealLabel,
+  benefits,
+  investmentPotential,
+  overview,
+  keyFeatures,
+  amenities,
+  locationAdvantages,
+  legalDetails,
+  pricingBreakdown,
+  faq,
+  images
+}) {
+  return {
+    id,
+    title,
+    location,
+    type,
+    listingMode,
+    budgetBucket,
+    featured,
+    price,
+    sizeLabel,
+    plotSize: sizeLabel,
+    sqft,
+    facing,
+    useCase,
+    dealLabel,
+    benefits,
+    description: benefits[0],
+    investmentPotential,
+    overview,
+    keyFeatures,
+    amenities,
+    locationAdvantages,
+    legalDetails,
+    pricingBreakdown,
+    faq,
+    images
+  };
+}
+
 export const properties = [
-  {
+  property({
     id: "tambaram-grand-enclave",
     title: "Tambaram Grand Enclave",
     location: "Tambaram, Chennai",
-    price: "Rs 52 Lakh onwards",
-    plotSize: "900 - 1500 sq ft",
-    sqft: "1500",
     type: "DTCP Plot",
-    beds: 0,
-    baths: 0,
+    listingMode: "sale",
+    budgetBucket: "50-100",
+    featured: true,
+    price: "Rs 52 Lakhs onwards",
+    sizeLabel: "900 - 1500 sq.ft",
+    sqft: "1500",
+    facing: "Premium facings available",
+    useCase: "Future home and land banking",
+    dealLabel: "Trusted Tambaram plotted address",
     benefits: [
-      "Close to Tambaram transport hub and established residential demand",
-      "Ideal for both immediate buyers and long-term investors",
-      "Strong resale interest due to location familiarity"
+      "Close to Tambaram transport hub and family demand",
+      "Suitable for own use and long-term hold",
+      "High location familiarity improves resale confidence"
     ],
     investmentPotential:
-      "Tambaram continues to hold long-term investor attention because it combines livability with resale confidence. Entry in a recognized location helps support future buyer demand.",
+      "Tambaram remains one of Chennai's strongest end-user led markets, which supports long-term confidence for plotted buyers.",
     overview:
-      "Tambaram Grand Enclave is designed for buyers who want a plot in one of Chennai's most trusted suburban markets. The project appeals to families planning future construction and investors seeking a clear, high-demand land asset.",
+      "A trusted plotted layout for buyers who want a known suburban market with strong transport links and everyday convenience.",
     keyFeatures: [
-      "Well-marked residential plots with road access",
-      "Strong nearby end-user demand",
-      "Suitable for future independent home construction"
+      "Well-marked plots",
+      "Road access",
+      "End-user friendly positioning"
     ],
-    amenities: [
-      "Blacktop internal roads",
-      "Street lighting provisions",
-      "Drainage planning and plotted layout structure"
-    ],
+    amenities: ["Blacktop roads", "Street lighting", "Structured layout planning"],
     locationAdvantages: [
-      "Quick access to Tambaram railway and bus connectivity",
-      "Close to schools, daily-use retail, and residential neighborhoods",
-      "Visible growth in surrounding plotted and housing demand"
+      "Rail and bus connectivity",
+      "Schools and retail nearby",
+      "Strong buyer recognition"
     ],
     legalDetails:
-      "Buyers seeking plots in Tambaram often prioritize documentation and long-term market trust. This listing is positioned around that need for legal comfort and clarity-based buying.",
+      "Positioned for buyers who want better documentation comfort before taking the next step.",
     pricingBreakdown: [
-      "Base plot cost starts from Rs 52 Lakh onwards depending on facing and size",
-      "Registration and statutory charges vary based on booking value",
-      "Site visit and documentation consultation support included through our team"
+      "Starts from Rs 52 Lakhs onwards",
+      "Final value varies by size and facing",
+      "Registration charges apply separately"
     ],
-    faq: [
-      {
-        question: "Why is Tambaram a strong location for land buying?",
-        answer:
-          "Tambaram benefits from strong recognition, connectivity, and steady residential demand, which supports both end use and long-term resale confidence."
-      },
-      {
-        question: "Is this suitable for future house construction?",
-        answer:
-          "Yes. Buyers who want to build later often prefer this type of plotted layout because it provides flexibility and future control."
-      },
-      {
-        question: "Who usually buys in this location?",
-        answer:
-          "Families, salaried professionals, and land investors all show interest in Tambaram because of its reputation and convenience."
-      },
-      {
-        question: "Can this work as an investment even if I do not build soon?",
-        answer:
-          "Yes. Many buyers hold land in Tambaram for appreciation and future liquidity before making a construction decision."
-      },
-      {
-        question: "Will Richman Maker guide the process?",
-        answer:
-          "Yes. We support the journey from inquiry and site visit through documentation guidance and registration coordination."
-      }
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=80"
-    ]
-  },
-  {
+    faq: plotFaq("Tambaram"),
+    images: [gallery.landA, gallery.landB, gallery.landC]
+  }),
+  property({
     id: "guduvanchery-growth-corridor",
     title: "Guduvanchery Growth Corridor Plots",
     location: "Guduvanchery, Chennai",
-    price: "Rs 34 Lakh onwards",
-    plotSize: "800 - 1400 sq ft",
-    sqft: "1400",
     type: "DTCP Plot",
-    beds: 0,
-    baths: 0,
+    listingMode: "sale",
+    budgetBucket: "below-50",
+    featured: true,
+    price: "Rs 34 Lakhs onwards",
+    sizeLabel: "800 - 1400 sq.ft",
+    sqft: "1400",
+    facing: "Multiple facing options",
+    useCase: "Affordable plotted entry",
+    dealLabel: "DTCP-focused value zone",
     benefits: [
-      "Affordable entry point for growing families and investors",
-      "Popular among buyers searching for DTCP plots Guduvanchery",
-      "Strong appreciation story tied to southern corridor expansion"
+      "Affordable entry point for first-time investors",
+      "Popular among buyers searching for DTCP plots",
+      "Growth story linked to the southern corridor"
     ],
     investmentPotential:
-      "Guduvanchery continues to attract buyers who want entry-level land investment with meaningful future upside. The area's affordability supports strong demand from first-time investors.",
+      "Guduvanchery remains one of the most searched land markets because it still offers relatively accessible entry with future upside.",
     overview:
-      "Guduvanchery Growth Corridor Plots are built around one of the most active suburban investment stories in Chennai. This is the kind of location buyers consider when they want affordability today and a chance at stronger appreciation tomorrow.",
-    keyFeatures: [
-      "Practical plot sizes for both home buyers and investors",
-      "Located in a demand-led southern expansion zone",
-      "Good fit for long-term wealth creation"
-    ],
-    amenities: [
-      "Road network access",
-      "Planned residential layout environment",
-      "Neighborhood growth visibility"
-    ],
-    locationAdvantages: [
-      "Connected to GST Road influence zones",
-      "Popular search destination for plot buyers in Chennai outskirts",
-      "Growing residential interest from end users and small investors"
-    ],
+      "A practical plotted option for buyers who want Chennai growth potential without entering at a premium price point.",
+    keyFeatures: ["Investor-friendly pricing", "Practical sizes", "Southern corridor visibility"],
+    amenities: ["Road access", "Layout planning", "Residential growth surroundings"],
+    locationAdvantages: ["GST Road influence", "High search demand", "Strong affordability story"],
     legalDetails:
-      "DTCP awareness is a major decision factor for Guduvanchery buyers. Richman Maker supports clients by walking them through documentation and approval context before purchase.",
+      "DTCP awareness and document clarity are central for Guduvanchery buyers, and that support is part of our process.",
     pricingBreakdown: [
-      "Base pricing starts from Rs 34 Lakh onwards depending on plot size and road position",
-      "Registration charges apply as per prevailing guidance value",
-      "Documentation review support included during buyer assistance"
+      "Starts from Rs 34 Lakhs onwards",
+      "Final value depends on exact plot and road position",
+      "Registration and statutory charges apply separately"
     ],
-    faq: [
-      {
-        question: "Why do buyers search heavily for DTCP plots Guduvanchery?",
-        answer:
-          "Because Guduvanchery offers affordability, growth potential, and a strong reputation among plotted development buyers."
-      },
-      {
-        question: "Is this good for first-time investors?",
-        answer:
-          "Yes. The price range and long-term development story make it attractive for buyers entering land investment for the first time."
-      },
-      {
-        question: "Can I hold this as a future asset?",
-        answer:
-          "Absolutely. Many clients buy in Guduvanchery with a medium- to long-term holding strategy."
-      },
-      {
-        question: "Does the location have future demand?",
-        answer:
-          "Yes. Demand continues because buyers want accessible, affordable suburban land with growth visibility."
-      },
-      {
-        question: "Do you help with booking and registration steps?",
-        answer:
-          "Yes. Richman Maker helps coordinate the process from property shortlist to ownership."
-      }
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
-    ]
-  },
-  {
+    faq: plotFaq("Guduvanchery"),
+    images: [gallery.landB, gallery.road, gallery.landC]
+  }),
+  property({
     id: "vandalur-golden-acre",
     title: "Vandalur Golden Acre",
     location: "Vandalur, Chennai",
-    price: "Rs 41 Lakh onwards",
-    plotSize: "900 - 1800 sq ft",
-    sqft: "1800",
     type: "Premium Plot",
-    beds: 0,
-    baths: 0,
+    listingMode: "sale",
+    budgetBucket: "50-100",
+    featured: true,
+    price: "Rs 41 Lakhs onwards",
+    sizeLabel: "900 - 1800 sq.ft",
+    sqft: "1800",
+    facing: "Premium-facing options",
+    useCase: "Premium suburban ownership",
+    dealLabel: "Fast-moving suburban layout",
     benefits: [
-      "Strong location recall for future resale value",
-      "Appealing to families planning independent homes",
-      "Near a rapidly improving suburban growth belt"
+      "Strong family-buyer appeal",
+      "Good fit for future villa construction",
+      "Visible market confidence in Vandalur"
     ],
     investmentPotential:
-      "Vandalur is gaining attention from buyers who want a location that still has room to grow but already carries strong demand visibility.",
+      "Vandalur's improving connectivity and buyer visibility continue to support medium- and long-term appreciation.",
     overview:
-      "Vandalur Golden Acre is aimed at buyers who want to secure land in a corridor with increasing market confidence. It is suited for those seeking a future home site or a medium-term appreciation asset.",
-    keyFeatures: [
-      "Premium plotted layout feel",
-      "Flexible sizes for different buyer budgets",
-      "Location with strong growth perception"
-    ],
-    amenities: [
-      "Access roads",
-      "Layout planning support",
-      "Residential development surroundings"
-    ],
-    locationAdvantages: [
-      "Good access to major suburban routes",
-      "Strong recognition among families searching Chennai outskirts",
-      "Improving infrastructure narrative supports future demand"
-    ],
+      "A premium plotted option in a corridor that balances present accessibility with future value potential.",
+    keyFeatures: ["Premium layout feel", "Flexible sizes", "Recognized suburban market"],
+    amenities: ["Access roads", "Layout support", "Residential surroundings"],
+    locationAdvantages: ["Growing route access", "Family visibility", "Better suburban pricing"],
     legalDetails:
-      "Documentation support is part of the value we provide because location growth means little without transaction confidence.",
+      "Ideal for buyers who want a location-led deal with cleaner transaction support from the start.",
     pricingBreakdown: [
-      "Base pricing starts from Rs 41 Lakh onwards",
-      "Charges vary by exact size and plot placement",
-      "Site visit and buyer guidance included"
+      "Starts from Rs 41 Lakhs onwards",
+      "Price changes by exact plot specification",
+      "Closing charges depend on final booking value"
     ],
-    faq: [
-      {
-        question: "Why is Vandalur becoming more attractive?",
-        answer:
-          "Buyers see it as a balanced location with growth, access, and future livability."
-      },
-      {
-        question: "Can families build here later?",
-        answer:
-          "Yes. This layout is designed to suit future home construction as well as asset holding."
-      },
-      {
-        question: "What kind of buyer usually chooses Vandalur?",
-        answer:
-          "Both families and long-term investors are active in this corridor."
-      },
-      {
-        question: "Is there appreciation potential?",
-        answer:
-          "Yes. The area's improving market perception and access profile support long-term value."
-      },
-      {
-        question: "Will I receive end-to-end support?",
-        answer:
-          "Yes. Richman Maker supports the buying process step by step."
-      }
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80"
-    ]
-  },
-  {
+    faq: plotFaq("Vandalur"),
+    images: [gallery.landC, gallery.villaA, gallery.landB]
+  }),
+  property({
     id: "chengalpattu-future-city",
     title: "Chengalpattu Future City Plots",
     location: "Chengalpattu, Chennai",
-    price: "Rs 29 Lakh onwards",
-    plotSize: "1000 - 2400 sq ft",
-    sqft: "2400",
     type: "Investment Plot",
-    beds: 0,
-    baths: 0,
-    benefits: [
-      "Strong long-term appreciation outlook",
-      "Larger plot options for patient investors",
-      "Attractive for buyers seeking early-entry value"
-    ],
-    investmentPotential:
-      "Chengalpattu is ideal for buyers who understand the power of entering a growth market before broader demand accelerates.",
-    overview:
-      "Chengalpattu Future City Plots are positioned for investors who think beyond immediate use and focus on long-term asset growth. The location offers space, affordability, and a strong future-value narrative.",
-    keyFeatures: [
-      "Wide range of plot sizes",
-      "Useful for long-term holding or staged development",
-      "Well suited to growth-oriented buyers"
-    ],
-    amenities: [
-      "Open layout planning",
-      "Road access connectivity",
-      "Emerging residential ecosystem"
-    ],
-    locationAdvantages: [
-      "Part of an expanding outer Chennai investment belt",
-      "Better entry pricing than many mature city-adjacent locations",
-      "Increasing investor curiosity and search demand"
-    ],
-    legalDetails:
-      "For long-term land investment, clarity matters as much as price. We help buyers review documentation support before moving into commitment.",
-    pricingBreakdown: [
-      "Base pricing starts from Rs 29 Lakh onwards",
-      "Value changes based on size and access positioning",
-      "Registration guidance offered through our process"
-    ],
-    faq: [
-      {
-        question: "Is Chengalpattu good for long-term investment?",
-        answer:
-          "Yes. It is especially attractive for buyers who prioritize future appreciation over immediate urban convenience."
-      },
-      {
-        question: "Can I buy a larger plot here within a moderate budget?",
-        answer:
-          "Yes. Chengalpattu often allows larger size options compared with more expensive Chennai corridors."
-      },
-      {
-        question: "Why do investors like this area?",
-        answer:
-          "Because it offers room for growth, entry value, and a developing long-term story."
-      },
-      {
-        question: "Can Richman Maker help explain the location potential?",
-        answer:
-          "Yes. We guide buyers through the real growth reasons behind each micro-market."
-      },
-      {
-        question: "Is documentation support available?",
-        answer:
-          "Yes. We help buyers understand the legal and process side before they proceed."
-      }
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80"
-    ]
-  },
-  {
-    id: "tambaram-east-green-fields",
-    title: "Tambaram East Green Fields",
-    location: "Tambaram, Chennai",
-    price: "Rs 47 Lakh onwards",
-    plotSize: "850 - 1350 sq ft",
-    sqft: "1350",
-    type: "Residential Plot",
-    beds: 0,
-    baths: 0,
-    benefits: [
-      "Good fit for future home buyers",
-      "Strong local demand and familiarity",
-      "Comforting blend of access and value"
-    ],
-    investmentPotential:
-      "Plots in familiar, high-search locations often attract more stable resale attention. This property benefits from Tambaram's enduring reputation.",
-    overview:
-      "A practical option for buyers who want Tambaram exposure without stretching beyond budget comfort, this listing balances accessibility, market trust, and future utility.",
-    keyFeatures: [
-      "Residential-size plots",
-      "End-user friendly location profile",
-      "Strong emotional appeal for family buyers"
-    ],
-    amenities: ["Road access", "Layout structure", "Nearby residential activity"],
-    locationAdvantages: [
-      "Trusted suburban identity",
-      "Convenience-led buyer demand",
-      "Suitable for both own use and holding"
-    ],
-    legalDetails:
-      "Designed for buyers who want clearer documentation support and a lower-friction purchase experience.",
-    pricingBreakdown: [
-      "Starting from Rs 47 Lakh onwards",
-      "Plot size and facing influence final value",
-      "Assistance provided during site visit and registration journey"
-    ],
-    faq: [
-      {
-        question: "Is Tambaram East good for family buyers?",
-        answer:
-          "Yes. Family buyers often prefer it because the broader Tambaram belt feels established and dependable."
-      },
-      {
-        question: "Can I invest and hold here?",
-        answer:
-          "Yes. Tambaram's consistent demand makes it a practical hold option."
-      },
-      {
-        question: "Is this plot suited for immediate construction?",
-        answer:
-          "It can suit both near-term builders and buyers who want to hold before building."
-      },
-      {
-        question: "How important is location familiarity?",
-        answer:
-          "Very important. Familiar markets often attract stronger buyer trust and resale interest."
-      },
-      {
-        question: "Will I receive guidance throughout the process?",
-        answer:
-          "Yes. Richman Maker supports each stage from inquiry to ownership."
-      }
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1200&q=80"
-    ]
-  },
-  {
-    id: "guduvanchery-dtcp-meadows",
-    title: "Guduvanchery DTCP Meadows",
-    location: "Guduvanchery, Chennai",
-    price: "Rs 36 Lakh onwards",
-    plotSize: "900 - 1600 sq ft",
-    sqft: "1600",
-    type: "DTCP Plot",
-    beds: 0,
-    baths: 0,
-    benefits: [
-      "DTCP-focused buyer appeal",
-      "Value-driven pricing with long-term upside",
-      "Suitable for land investors building a first property portfolio"
-    ],
-    investmentPotential:
-      "Guduvanchery continues to reward disciplined investors who understand the power of early entry into expanding residential corridors.",
-    overview:
-      "Guduvanchery DTCP Meadows targets buyers who want affordability without giving up future potential. It is ideal for buyers who research carefully and act before the next pricing cycle moves upward.",
-    keyFeatures: [
-      "Investor-friendly pricing",
-      "Practical plot sizes",
-      "Location with strong online buyer interest"
-    ],
-    amenities: ["Internal layout roads", "Plot demarcation", "Growth-led surroundings"],
-    locationAdvantages: [
-      "Popular among southern corridor land buyers",
-      "Affordable compared to mature city-adjacent zones",
-      "High relevance for plot-first investors"
-    ],
-    legalDetails:
-      "Approval awareness and document comfort are central to the appeal of this kind of plotted opportunity. Buyer support is part of our process.",
-    pricingBreakdown: [
-      "Starting from Rs 36 Lakh onwards",
-      "Final value depends on plot size and exact location inside the layout",
-      "Guidance available for booking, document review, and registration"
-    ],
-    faq: [
-      {
-        question: "Why are DTCP plots so popular in Guduvanchery?",
-        answer:
-          "Because buyers want structured plotted development in a location that still offers affordable entry."
-      },
-      {
-        question: "Is this suitable for a first land purchase?",
-        answer:
-          "Yes. The pricing and growth profile make it approachable for first-time buyers."
-      },
-      {
-        question: "What gives this location future value?",
-        answer:
-          "Its demand momentum, affordability, and connection to Chennai's expanding southern corridor."
-      },
-      {
-        question: "Can I compare multiple Guduvanchery options?",
-        answer:
-          "Yes. We help buyers compare layouts based on budget, legal comfort, and future goals."
-      },
-      {
-        question: "Does Richman Maker assist after booking too?",
-        answer:
-          "Yes. We stay involved through documentation and registration support."
-      }
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80"
-    ]
-  },
-  {
-    id: "vandalur-royal-gateway",
-    title: "Vandalur Royal Gateway",
-    location: "Vandalur, Chennai",
-    price: "Rs 44 Lakh onwards",
-    plotSize: "1000 - 1700 sq ft",
-    sqft: "1700",
-    type: "Residential Plot",
-    beds: 0,
-    baths: 0,
-    benefits: [
-      "Premium suburban feel",
-      "Useful for future own-use planning",
-      "Location visibility supports long-term confidence"
-    ],
-    investmentPotential:
-      "Vandalur's steady buyer attention and improving access story support both emotional and financial value for land buyers.",
-    overview:
-      "A balanced plotted option for buyers who want a recognized suburban growth zone with room for appreciation and a comfortable future construction outlook.",
-    keyFeatures: [
-      "Well-sized residential plots",
-      "Suitable for future family home projects",
-      "Appealing location narrative for resale"
-    ],
-    amenities: ["Road access", "Layout planning", "Growth corridor surroundings"],
-    locationAdvantages: [
-      "Convenient suburban positioning",
-      "Visible development traction",
-      "Family buyer appeal"
-    ],
-    legalDetails:
-      "The value of a plotted property improves when buyers understand the process clearly. We support that clarity before and during purchase.",
-    pricingBreakdown: [
-      "Starting from Rs 44 Lakh onwards",
-      "Site-specific value varies based on size and placement",
-      "Registration-stage support available"
-    ],
-    faq: [
-      {
-        question: "Why choose Vandalur over a denser city location?",
-        answer:
-          "Because it can offer better plot value, future flexibility, and a less crowded entry price point."
-      },
-      {
-        question: "Does this suit both investors and families?",
-        answer:
-          "Yes. It works for buyers planning construction later as well as those holding for appreciation."
-      },
-      {
-        question: "Is the area growing steadily?",
-        answer:
-          "Yes. Vandalur continues to benefit from expanding suburban demand."
-      },
-      {
-        question: "Can I buy now and build later?",
-        answer:
-          "Yes. That is one of the strongest reasons buyers choose plotted assets."
-      },
-      {
-        question: "Will Richman Maker help explain the legal process?",
-        answer:
-          "Yes. We simplify the process at each major stage."
-      }
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1200&q=80"
-    ]
-  },
-  {
-    id: "chengalpattu-signature-layout",
-    title: "Chengalpattu Signature Layout",
-    location: "Chengalpattu, Chennai",
-    price: "Rs 31 Lakh onwards",
-    plotSize: "1200 - 2400 sq ft",
+    listingMode: "sale",
+    budgetBucket: "below-50",
+    featured: true,
+    price: "Rs 29 Lakhs onwards",
+    sizeLabel: "1000 - 2400 sq.ft",
     sqft: "2400",
-    type: "Investment Plot",
-    beds: 0,
-    baths: 0,
+    facing: "Flexible inventory",
+    useCase: "Long-hold investment",
+    dealLabel: "Large-size value entry",
     benefits: [
-      "Bigger size options for long-term buyers",
-      "Suitable for growth-focused investors",
-      "Early-entry value in an expanding market"
+      "Attractive for patient investors",
+      "Larger plot options in a growth corridor",
+      "Strong future-value narrative"
     ],
     investmentPotential:
-      "For patient investors, Chengalpattu can offer a more compelling value-to-growth ratio than many mature urban belts.",
+      "Chengalpattu suits buyers who want to enter early in a market before broader price acceleration deepens.",
     overview:
-      "This layout is designed for investors who want to buy land before the next major wave of broader market attention arrives. It supports both capital-growth thinking and future-use flexibility.",
-    keyFeatures: [
-      "Large-format plot options",
-      "Designed for medium- and long-term holding",
-      "Practical for investors building a land portfolio"
-    ],
-    amenities: ["Open plotted environment", "Road access", "Scalable location story"],
-    locationAdvantages: [
-      "Emerging growth belt beyond high-priced city zones",
-      "Better space-to-cost value",
-      "Appealing to investors seeking future upside"
-    ],
+      "A long-term land strategy option for buyers who want scale, affordability, and future market upside.",
+    keyFeatures: ["Large plot formats", "Outer-belt growth story", "Value-led entry pricing"],
+    amenities: ["Road access", "Open layout planning", "Development-ready positioning"],
+    locationAdvantages: ["Emerging growth belt", "Better size-to-cost ratio", "Investor interest rising"],
     legalDetails:
-      "We help buyers understand the legal and documentation side so the investment case is matched by buying clarity.",
+      "Long-hold investors still need documentation clarity, and that support remains part of our service model.",
     pricingBreakdown: [
-      "Starts from Rs 31 Lakh onwards",
-      "Larger plots available depending on buyer preference",
-      "Booking and registration support available"
+      "Starts from Rs 29 Lakhs onwards",
+      "Larger plots available within the layout",
+      "Registration charges vary by final plot choice"
     ],
-    faq: [
-      {
-        question: "Who should consider Chengalpattu plots?",
-        answer:
-          "Investors and value-conscious buyers who are comfortable taking a longer-term appreciation view."
-      },
-      {
-        question: "Can this be a future family asset?",
-        answer:
-          "Yes. Many buyers secure such plots for children, retirement planning, or phased future development."
-      },
-      {
-        question: "Why is larger plot size important?",
-        answer:
-          "Larger plots provide flexibility, stronger perceived value, and more future planning options."
-      },
-      {
-        question: "Does this location have active investor interest?",
-        answer:
-          "Yes. Chengalpattu is increasingly discussed among buyers looking at outer Chennai growth."
-      },
-      {
-        question: "Will I receive guidance before registration?",
-        answer:
-          "Yes. Richman Maker supports buyers well before and during registration."
-      }
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1200&q=80"
-    ]
-  },
-  {
-    id: "tambaram-premium-corners",
-    title: "Tambaram Premium Corners",
-    location: "Tambaram, Chennai",
-    price: "Rs 58 Lakh onwards",
-    plotSize: "1000 - 1600 sq ft",
-    sqft: "1600",
-    type: "Corner Plot",
-    beds: 0,
-    baths: 0,
+    faq: plotFaq("Chengalpattu"),
+    images: [gallery.landA, gallery.road, gallery.flatC]
+  }),
+  property({
+    id: "omr-discount-land-deal",
+    title: "OMR Discount Land Deal",
+    location: "OMR Corridor, Chennai",
+    type: "Land",
+    listingMode: "sale",
+    budgetBucket: "above-100",
+    featured: true,
+    price: "Rs 4,700 / sq.ft | Total Rs 1.2 Cr",
+    sizeLabel: "2600 sq.ft (36 x 70)",
+    sqft: "2600",
+    facing: "North Facing | Near Bus Route",
+    useCase: "Premium plotted investment",
+    dealLabel: "Market Rs 6,000 - discount deal",
     benefits: [
-      "Premium corner options with better layout appeal",
-      "Suitable for buyers who value status and future home design",
-      "High-demand micro-market visibility"
+      "Large-size premium parcel",
+      "Below nearby market comparison",
+      "Better bus-route accessibility"
     ],
     investmentPotential:
-      "Corner and premium-facing plots in known locations often attract stronger buyer interest at resale due to design flexibility and perceived exclusivity.",
+      "Large-format land parcels with below-market entry can create stronger upside when corridor demand continues to mature.",
     overview:
-      "Tambaram Premium Corners are positioned for buyers who want a better-quality plotted asset in a location already associated with trust, convenience, and family demand.",
-    keyFeatures: [
-      "Premium-facing plot options",
-      "Useful for better elevation planning in future construction",
-      "Strong market confidence from location familiarity"
-    ],
-    amenities: ["Structured layout", "Access roads", "Premium plot positioning"],
-    locationAdvantages: [
-      "Tambaram's broad buyer recognition",
-      "Steady residential and investment relevance",
-      "Good future resale psychology"
-    ],
+      "A premium OMR-side land opportunity for buyers who want a sharper entry point in a high-attention corridor.",
+    keyFeatures: ["2600 sq.ft size", "36 x 70 dimension", "North-facing layout"],
+    amenities: ["Approach road access", "Bus-route proximity", "Build-friendly parcel depth"],
+    locationAdvantages: ["OMR market visibility", "Transport access", "Premium site-visit appeal"],
     legalDetails:
-      "This offering is intended for buyers who want premium location quality without compromising on transaction clarity.",
+      "Best suited for buyers who want a direct deal with better process clarity before a higher-ticket commitment.",
     pricingBreakdown: [
-      "Starts from Rs 58 Lakh onwards for select premium positions",
-      "Corner plots may carry higher value based on exact dimensions",
-      "Buyer support continues through registration"
+      "Rate fixed at Rs 4,700 per sq.ft",
+      "Total approximately Rs 1.2 Cr",
+      "Nearby comparison quoted around Rs 6,000 per sq.ft"
     ],
-    faq: [
-      {
-        question: "Why do buyers prefer corner plots?",
-        answer:
-          "Corner plots often offer better visibility, easier design flexibility, and stronger perceived value."
-      },
-      {
-        question: "Is Tambaram worth the premium compared to outer areas?",
-        answer:
-          "For many buyers, yes. Tambaram offers stronger present-day demand and location confidence."
-      },
-      {
-        question: "Can this be used for a premium future home?",
-        answer:
-          "Yes. These plots are especially attractive for buyers planning a more aspirational build later."
-      },
-      {
-        question: "Does higher location trust help resale?",
-        answer:
-          "Yes. Trusted markets usually attract broader buyer interest when you choose to exit."
-      },
-      {
-        question: "Is end-to-end support available?",
-        answer:
-          "Yes. Richman Maker remains involved through the full process."
-      }
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80"
-    ]
-  },
-  {
-    id: "guduvanchery-smart-invest",
-    title: "Guduvanchery Smart Invest Layout",
-    location: "Guduvanchery, Chennai",
-    price: "Rs 39 Lakh onwards",
-    plotSize: "850 - 1500 sq ft",
-    sqft: "1500",
-    type: "Residential Plot",
-    beds: 0,
-    baths: 0,
+    faq: plotFaq("the OMR corridor"),
+    images: [gallery.landA, gallery.road, gallery.landC]
+  }),
+  property({
+    id: "padur-rental-flats",
+    title: "Flats for Rent - Padur (OMR)",
+    location: "Padur, Chennai",
+    type: "Flat",
+    listingMode: "rent",
+    budgetBucket: "rental",
+    featured: true,
+    price: "Rent Rs 30K - Rs 40K",
+    sizeLabel: "3 BHK | 1500 - 2000 sq.ft",
+    sqft: "1500 - 2000",
+    facing: "Semi / Fully Furnished | Gated Community",
+    useCase: "Premium family rental",
+    dealLabel: "Advance 5 months",
     benefits: [
-      "Ideal for first and second property investors",
-      "Balanced between affordability and future upside",
-      "Popular among buyers who search online before investing"
+      "3 BHK rental inventory on OMR",
+      "Semi-furnished and fully furnished options",
+      "Gated community comfort"
     ],
     investmentPotential:
-      "Guduvanchery remains one of the strongest search-led investment destinations because it feels achievable while still carrying a real growth story.",
+      "Padur rentals remain active because OMR professionals and families consistently search for larger gated-community apartments.",
     overview:
-      "This layout is built for practical investors who want to act in a known growth zone without overspending. It offers the kind of balance many Chennai buyers are searching for today.",
-    keyFeatures: [
-      "Efficient plot sizing",
-      "Useful for staggered wealth-building plans",
-      "Popular budget range for suburban investors"
-    ],
-    amenities: ["Road access", "Plotted layout design", "Residential growth corridor"],
-    locationAdvantages: [
-      "Good search demand among Chennai plot buyers",
-      "Affordable entry compared with more mature zones",
-      "Strong narrative for future capital growth"
-    ],
+      "A premium Padur rental shortlist for families and professionals who want space, community, and OMR access.",
+    keyFeatures: ["3 BHK layouts", "1500 to 2000 sq.ft", "Gated community lifestyle"],
+    amenities: ["Security", "Lift", "Community-ready living"],
+    locationAdvantages: ["OMR commute convenience", "Popular rental catchment", "Family-friendly locality"],
     legalDetails:
-      "Richman Maker guides the buyer through documentation checkpoints because clarity is especially important for value-driven investors.",
+      "Rental support includes guidance on advance, furnishing expectations, and agreement-stage clarity.",
     pricingBreakdown: [
-      "Starts from Rs 39 Lakh onwards",
-      "Rates vary with plot dimensions and access",
-      "Support provided for site visit, booking, and process guidance"
+      "Rent between Rs 30,000 and Rs 40,000",
+      "Advance around 5 months",
+      "Final rent depends on furnishing and community specification"
     ],
-    faq: [
-      {
-        question: "Why is Guduvanchery attractive to online buyers?",
-        answer:
-          "Because it combines affordability, growth visibility, and strong awareness in Chennai property search behavior."
-      },
-      {
-        question: "Can this be part of a long-term investment plan?",
-        answer:
-          "Yes. Many buyers enter Guduvanchery with a medium- to long-term capital appreciation goal."
-      },
-      {
-        question: "What kind of buyer usually chooses this project?",
-        answer:
-          "It suits salaried professionals, first-time investors, and families planning future construction."
-      },
-      {
-        question: "Is it possible to compare this with Tambaram value-wise?",
-        answer:
-          "Yes. We help buyers compare based on budget, growth outlook, and resale psychology."
-      },
-      {
-        question: "Do you support the full transaction process?",
-        answer:
-          "Yes. That support is a core part of our service."
-      }
+    faq: rentalFaq("flat"),
+    images: [gallery.flatA, gallery.flatB, gallery.flatC]
+  }),
+  property({
+    id: "pudhupakkam-commercial-land",
+    title: "Commercial Land - Pudhupakkam",
+    location: "Pudhupakkam, Chennai",
+    type: "Commercial Land",
+    listingMode: "rent",
+    budgetBucket: "rental",
+    price: "Rent Rs 5 Lakhs",
+    sizeLabel: "50 cents | 100 ft frontage",
+    sqft: "21780",
+    facing: "Main Road",
+    useCase: "Commercial leasing",
+    dealLabel: "High-visibility frontage deal",
+    benefits: [
+      "50 cents of commercial land",
+      "100 ft frontage for visibility",
+      "Direct main-road access"
     ],
-    images: [
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1200&q=80"
-    ]
-  }
+    investmentPotential:
+      "Commercial frontage sites in visible road positions can attract premium tenant and operator interest.",
+    overview:
+      "A scale commercial frontage opportunity for operators who need exposure, access, and flexible land use.",
+    keyFeatures: ["50 cents size", "100 ft frontage", "Main-road commercial profile"],
+    amenities: ["Direct road exposure", "Vehicle-friendly access", "Commercial visibility"],
+    locationAdvantages: ["Expanding corridor relevance", "Useful for branded presence", "Better inspection appeal"],
+    legalDetails:
+      "Commercial leasing needs clearer conversation around use case, frontage, and tenure, and we help structure that process.",
+    pricingBreakdown: [
+      "Quoted rent at Rs 5 Lakhs",
+      "Terms depend on intended commercial use",
+      "Final lease structure can be discussed post visit"
+    ],
+    faq: rentalFaq("commercial land"),
+    images: [gallery.road, gallery.landB, gallery.flatC]
+  }),
+  property({
+    id: "kelambakkam-land-deal",
+    title: "Land - Kelambakkam (OMR)",
+    location: "Kelambakkam, Chennai",
+    type: "Land",
+    listingMode: "sale",
+    budgetBucket: "50-100",
+    featured: true,
+    price: "Rs 4,200 / sq.ft | Rs 75 Lakhs",
+    sizeLabel: "1800 sq.ft (30 x 60)",
+    sqft: "1800",
+    facing: "North Facing | Near Bus Terminus",
+    useCase: "Lowest-entry OMR land buy",
+    dealLabel: "Nearby Rs 7,000 - very low price",
+    benefits: [
+      "Bus-terminus proximity",
+      "North-facing plot dimensions",
+      "Low entry against nearby market rate"
+    ],
+    investmentPotential:
+      "Kelambakkam continues to attract buyers because better-value entries can reprice quickly as OMR demand deepens.",
+    overview:
+      "A value-led OMR-side plot for buyers who want premium corridor access without paying nearby market benchmarks.",
+    keyFeatures: ["1800 sq.ft size", "30 x 60 dimension", "North-facing plot"],
+    amenities: ["Transport-linked access", "Build-friendly size", "Good entry-point psychology"],
+    locationAdvantages: ["OMR growth story", "Better accessibility", "Value against surrounding price points"],
+    legalDetails:
+      "Suitable for buyers who want a price-led opportunity backed by straightforward process support.",
+    pricingBreakdown: [
+      "Rate at Rs 4,200 per sq.ft",
+      "Total approximately Rs 75 Lakhs",
+      "Nearby comparison indicated around Rs 7,000 per sq.ft"
+    ],
+    faq: plotFaq("Kelambakkam"),
+    images: [gallery.landB, gallery.road, gallery.landC]
+  }),
+  property({
+    id: "siruseri-large-plot",
+    title: "Land - Siruseri (Large Plot)",
+    location: "Siruseri, Chennai",
+    type: "Land",
+    listingMode: "sale",
+    budgetBucket: "above-100",
+    price: "Rs 4,600 / sq.ft | Total Rs 1.2 Cr",
+    sizeLabel: "2600 sq.ft (40 x 64)",
+    sqft: "2600",
+    facing: "West Road | Build North Facing",
+    useCase: "Premium OMR land banking",
+    dealLabel: "Large-format premium plot",
+    benefits: [
+      "Large plot for premium construction",
+      "Strong Siruseri corridor visibility",
+      "Useful for both build and hold strategies"
+    ],
+    investmentPotential:
+      "Siruseri remains a premium OMR-linked zone where larger plots can appeal strongly to investors and villa buyers.",
+    overview:
+      "A larger-format plotted asset for buyers who want more size, more flexibility, and a more premium position inside the OMR ecosystem.",
+    keyFeatures: ["2600 sq.ft parcel", "40 x 64 dimension", "North-build planning advantage"],
+    amenities: ["Road-linked access", "Premium site feel", "Good construction flexibility"],
+    locationAdvantages: ["IT-corridor influence", "Premium buyer visibility", "Long-term corridor strength"],
+    legalDetails:
+      "Higher-ticket plotted deals need better process confidence, so documentation and transaction clarity remain key.",
+    pricingBreakdown: [
+      "Rate at Rs 4,600 per sq.ft",
+      "Total value around Rs 1.2 Cr",
+      "Final structuring depends on due diligence and booking terms"
+    ],
+    faq: plotFaq("Siruseri"),
+    images: [gallery.landA, gallery.villaA, gallery.landC]
+  }),
+  property({
+    id: "urbanrise-padur-flat",
+    title: "Flat - Urbanrise Padur",
+    location: "Padur, Chennai",
+    type: "Flat",
+    listingMode: "sale",
+    budgetBucket: "50-100",
+    price: "Rs 65 Lakhs",
+    sizeLabel: "2 BHK | 900 sq.ft",
+    sqft: "900",
+    facing: "15th Floor of 19 | 100+ amenities",
+    useCase: "Lifestyle apartment ownership",
+    dealLabel: "High-amenity apartment buy",
+    benefits: [
+      "Urbanrise community appeal",
+      "2 BHK compact ownership",
+      "Strong Padur lifestyle positioning"
+    ],
+    investmentPotential:
+      "Amenity-led apartments in Padur remain relevant to both end-use buyers and investors targeting OMR-linked demand.",
+    overview:
+      "A lifestyle apartment option for buyers who want a branded residential environment with practical OMR connectivity.",
+    keyFeatures: ["2 BHK configuration", "900 sq.ft size", "15th-floor placement"],
+    amenities: ["100+ community amenities", "Security", "Lift convenience"],
+    locationAdvantages: ["Padur rental and resale visibility", "OMR access", "Brand-led buyer confidence"],
+    legalDetails:
+      "Flat buyers are supported with clarity on pricing, community positioning, and transaction-stage expectations.",
+    pricingBreakdown: [
+      "Quoted at Rs 65 Lakhs",
+      "Registration and maintenance vary by project terms",
+      "Final numbers can be reviewed with the current unit owner or channel"
+    ],
+    faq: plotFaq("Padur"),
+    images: [gallery.flatA, gallery.flatB, gallery.flatC]
+  }),
+  property({
+    id: "kanathur-duplex-rental",
+    title: "House for Rent - Kanathur (ECR)",
+    location: "Kanathur, Chennai",
+    type: "House for Rent",
+    listingMode: "rent",
+    budgetBucket: "rental",
+    price: "Rs 40,000 / month",
+    sizeLabel: "4 BHK Duplex | 2000 sq.ft",
+    sqft: "2000",
+    facing: "Semi Furnished",
+    useCase: "Premium family rental",
+    dealLabel: "ECR duplex lifestyle rental",
+    benefits: [
+      "4 BHK duplex format",
+      "Semi-furnished family-ready layout",
+      "ECR-side premium living feel"
+    ],
+    investmentPotential:
+      "Larger duplex rentals in lifestyle corridors remain attractive for families wanting more space than a standard apartment can offer.",
+    overview:
+      "A premium rental home for families who want a more spacious, more private ECR-side living experience.",
+    keyFeatures: ["4 BHK duplex", "2000 sq.ft area", "Semi-furnished setup"],
+    amenities: ["Independent-home style space", "Family room count", "Lifestyle corridor access"],
+    locationAdvantages: ["ECR desirability", "Useful for family tenants", "Better premium perception"],
+    legalDetails:
+      "Rental coordination includes move-in clarity, furnishing expectations, and agreement-stage support.",
+    pricingBreakdown: [
+      "Monthly rent Rs 40,000",
+      "Advance and agreement terms on request",
+      "Visit slots available by appointment"
+    ],
+    faq: rentalFaq("house"),
+    images: [gallery.villaA, gallery.flatB, gallery.landA]
+  }),
+  property({
+    id: "perumbakkam-compact-flat",
+    title: "Flat - Perumbakkam",
+    location: "Perumbakkam, Chennai",
+    type: "Flat",
+    listingMode: "sale",
+    budgetBucket: "below-50",
+    price: "Rs 41 Lakhs",
+    sizeLabel: "1 BHK | 650 sq.ft",
+    sqft: "650",
+    facing: "3rd Floor | Opposite International School",
+    useCase: "Compact apartment investment",
+    dealLabel: "Accessible first-buy flat",
+    benefits: [
+      "Compact 1 BHK apartment",
+      "Opposite international school",
+      "Useful first apartment or rental investment"
+    ],
+    investmentPotential:
+      "Compact flats near schools and residential pockets often remain easier to position for both owner-users and smaller investors.",
+    overview:
+      "A practical apartment-buying option for first-time buyers who want a manageable ticket size with everyday convenience.",
+    keyFeatures: ["1 BHK plan", "650 sq.ft size", "3rd-floor placement"],
+    amenities: ["School-facing convenience", "Compact budget", "Usable apartment layout"],
+    locationAdvantages: ["Perumbakkam family relevance", "School access", "Better entry affordability"],
+    legalDetails:
+      "Apartment purchase guidance includes owner-side coordination, title clarity, and transaction-stage assistance.",
+    pricingBreakdown: [
+      "Quoted at Rs 41 Lakhs",
+      "Registration charges apply separately",
+      "Final structure depends on owner-side terms"
+    ],
+    faq: plotFaq("Perumbakkam"),
+    images: [gallery.flatA, gallery.flatC, gallery.flatB]
+  })
 ];

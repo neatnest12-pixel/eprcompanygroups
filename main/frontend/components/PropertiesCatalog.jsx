@@ -5,35 +5,31 @@ import Link from "next/link";
 import { company } from "../lib/content";
 import { properties } from "../lib/properties";
 
-const locations = [
-  "All Locations",
-  "Tambaram, Chennai",
-  "Guduvanchery, Chennai",
-  "Vandalur, Chennai",
-  "Chengalpattu, Chennai"
+const locations = ["All Locations", ...new Set(properties.map((property) => property.location))];
+const types = ["All Types", ...new Set(properties.map((property) => property.type))];
+const budgets = [
+  { label: "All Budgets", value: "all" },
+  { label: "Below Rs 50 Lakh", value: "below-50" },
+  { label: "Rs 50 Lakh - Rs 1 Cr", value: "50-100" },
+  { label: "Above Rs 1 Cr", value: "above-100" },
+  { label: "Rental Deals", value: "rental" }
 ];
-const types = ["All Types", "DTCP Plot", "Residential Plot", "Investment Plot", "Premium Plot", "Corner Plot"];
-const budgets = ["All Budgets", "Below Rs 40 Lakh", "Rs 40 Lakh - Rs 55 Lakh", "Above Rs 55 Lakh"];
 
 function matchesBudget(price, budget) {
-  if (budget === "All Budgets") return true;
-  if (budget === "Below Rs 40 Lakh") return price.includes("29") || price.includes("31") || price.includes("34") || price.includes("36") || price.includes("39");
-  if (budget === "Rs 40 Lakh - Rs 55 Lakh") return price.includes("41") || price.includes("44") || price.includes("47") || price.includes("52");
-  if (budget === "Above Rs 55 Lakh") return price.includes("58");
-  return true;
+  return budget === "all" || price === budget;
 }
 
 export default function PropertiesCatalog() {
   const [location, setLocation] = useState("All Locations");
   const [type, setType] = useState("All Types");
-  const [budget, setBudget] = useState("All Budgets");
+  const [budget, setBudget] = useState("all");
 
   const filtered = useMemo(
     () =>
       properties.filter((property) => {
         const locationOk = location === "All Locations" || property.location === location;
         const typeOk = type === "All Types" || property.type === type;
-        const budgetOk = matchesBudget(property.price, budget);
+        const budgetOk = matchesBudget(property.budgetBucket, budget);
         return locationOk && typeOk && budgetOk;
       }),
     [location, type, budget]
@@ -68,7 +64,9 @@ export default function PropertiesCatalog() {
             className="form-input"
           >
             {budgets.map((item) => (
-              <option key={item}>{item}</option>
+              <option key={item.value} value={item.value}>
+                {item.label}
+              </option>
             ))}
           </select>
           <select
@@ -93,17 +91,31 @@ export default function PropertiesCatalog() {
               loading="lazy"
             />
             <div className="p-6">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="rounded-full bg-[#1E3A5F]/8 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#1E3A5F]">
+                  {property.listingMode === "rent" ? "For Rent" : "For Sale"}
+                </span>
+                {property.dealLabel ? (
+                  <span className="rounded-full bg-[#C9A24A]/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#C9A24A]">
+                    {property.dealLabel}
+                  </span>
+                ) : null}
+              </div>
               <p className="text-sm font-medium text-[#2E7D32]">{property.location}</p>
               <h3 className="mt-2 text-xl font-semibold text-[#1E3A5F]">{property.title}</h3>
               <div className="mt-3 flex flex-wrap gap-3 text-sm text-[#6B7280]">
                 <span className="rounded-full bg-[#F5F7FA] px-3 py-1 text-[#C9A24A]">{property.price}</span>
-                <span className="rounded-full bg-[#F5F7FA] px-3 py-1">{property.plotSize}</span>
+                <span className="rounded-full bg-[#F5F7FA] px-3 py-1">{property.sizeLabel}</span>
                 <span className="rounded-full bg-[#F5F7FA] px-3 py-1">{property.type}</span>
               </div>
               <div className="mt-5 space-y-2">
                 <p className="text-sm leading-7 text-[#6B7280]">
                   <span className="font-semibold text-[#1E3A5F]">Benefits:</span>{" "}
                   {property.benefits.join(". ")}.
+                </p>
+                <p className="text-sm leading-7 text-[#6B7280]">
+                  <span className="font-semibold text-[#1E3A5F]">Facing / highlights:</span>{" "}
+                  {property.facing}
                 </p>
                 <p className="text-sm leading-7 text-[#6B7280]">
                   <span className="font-semibold text-[#1E3A5F]">Investment note:</span>{" "}

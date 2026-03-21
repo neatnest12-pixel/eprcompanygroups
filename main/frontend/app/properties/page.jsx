@@ -1,12 +1,13 @@
 import Link from "next/link";
 import PropertiesCatalog from "../../components/PropertiesCatalog";
+import { company } from "../../lib/content";
 
 export const metadata = {
-  title: "Plots in Tambaram, Guduvanchery and Chennai | Richman Maker Properties",
+  title: "Properties in Chennai | Land, Flats, Rentals and Commercial Deals | Richman Maker",
   description:
-    "Browse plots in Tambaram, Guduvanchery, Vandalur, and Chengalpattu with Richman Maker. Explore price ranges, plot sizes, benefits, and investment potential for Chennai land buyers.",
+    "Browse premium Chennai property deals with Richman Maker including land, flats, rentals, and commercial opportunities across OMR, Tambaram, Guduvanchery, Chengalpattu, Padur, and more.",
   keywords:
-    "plots in Tambaram, DTCP plots Guduvanchery, land for sale Chennai, Chengalpattu plots, Vandalur plots"
+    "land for sale Chennai, OMR property deals, Padur flats for rent, commercial land Pudhupakkam, plots in Tambaram"
 };
 
 export default function PropertiesPage() {
@@ -16,16 +17,14 @@ export default function PropertiesPage() {
         <div>
           <p className="section-subtitle">Property Listings</p>
           <h1 className="section-title mt-3">
-            Verified plot opportunities across Chennai's most searched growth locations
+            Premium Chennai property listings across land, flats, rentals, and commercial deals
           </h1>
           <p className="mt-5 max-w-5xl text-base leading-8 text-[#6B7280]">
-            Buyers searching for plots in Tambaram, land for sale in Chennai, DTCP plots in
-            Guduvanchery, and plotted investments near Vandalur or Chengalpattu usually want three
-            things: location growth, legal comfort, and a price point that still leaves room for
-            appreciation. This properties page is built around that exact search behavior. The
-            listings below are presented with practical details such as location, price range, plot
-            size, buyer benefits, and an investment-focused explanation so you can compare more
-            intelligently before you book a site visit.
+            This listing page now combines premium plotted opportunities, apartment deals, rental
+            inventory, and commercial land so serious buyers and tenants can compare everything in
+            one place. Whether you are looking for a lowest-price OMR land deal, a gated-community
+            rental in Padur, a branded apartment buy, or a commercial frontage asset, every card is
+            presented with the practical details that matter before you make a call.
           </p>
         </div>
 
@@ -43,7 +42,7 @@ export default function PropertiesPage() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3 lg:justify-end">
-              <a href="tel:+918939427799" className="btn-gold">
+              <a href={company.phoneHref} className="btn-gold">
                 Call for Shortlist Help
               </a>
               <Link href="/contact" className="btn-outline">

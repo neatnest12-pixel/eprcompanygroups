@@ -6,6 +6,7 @@ import {
   company,
   featuredPropertiesIntro,
   finalCtaText,
+  heroDeal,
   homeTestimonials,
   homeTrustParagraphs,
   internalLinkSuggestions,
@@ -23,7 +24,7 @@ export const metadata = {
     "ERP Group Company, Richman Maker, plots in Tambaram, land for sale Chennai, DTCP plots Guduvanchery, land promoter in Chennai, Chengalpattu plots"
 };
 
-const featured = properties.slice(0, 6);
+const featured = properties.filter((property) => property.featured).slice(0, 6);
 
 export default function HomePage() {
   return (
@@ -38,7 +39,7 @@ export default function HomePage() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#102746]/95 via-[#1E3A5F]/90 to-[#16314d]/72" />
 
-        <div className="container-shell relative z-10 flex min-h-screen flex-col justify-center py-24">
+        <div className="container-shell relative z-10 grid min-h-screen gap-10 py-24 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-center">
           <div className="max-w-4xl fade-in">
             <p className="mb-5 text-sm font-semibold uppercase tracking-[0.42em] text-[#C9A24A]">
               {company.category}
@@ -52,8 +53,10 @@ export default function HomePage() {
             <h2 className="mt-4 text-2xl font-semibold text-[#C9A24A] sm:text-3xl">
               {company.brandName}
             </h2>
+            <p className="mt-3 text-lg font-medium text-white/85">
+              {company.tagline}
+            </p>
             <p className="mt-6 max-w-3xl text-base leading-8 text-white/85 sm:text-lg">
-              {company.tagline}.{" "}
               If you are searching for plots in Tambaram, DTCP plots in Guduvanchery,
               land for sale in Chennai outskirts, or growth-focused investments near
               Vandalur and Chengalpattu, {company.brandName} helps you move forward with better
@@ -65,7 +68,8 @@ export default function HomePage() {
               {[
                 "DTCP and approval-focused guidance",
                 "Site visit support across Chennai growth zones",
-                "Documentation clarity before commitment"
+                "Documentation clarity before commitment",
+                `Call ${company.phoneDisplay}`
               ].map((item) => (
                 <span
                   key={item}
@@ -90,7 +94,31 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="card-white mt-12 grid gap-4 border-[#C9A24A]/20 p-6 md:grid-cols-[1.3fr_1fr_1fr_auto] animate-fade-up stagger-1">
+          <div className="glass-panel animate-fade-up stagger-2 p-6 text-white">
+            <p className="text-sm uppercase tracking-[0.3em] text-[#C9A24A]">Hero Property</p>
+            <h3
+              className="mt-4 text-3xl font-semibold"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              {heroDeal.title}
+            </h3>
+            <p className="mt-2 text-sm font-semibold text-[#C9A24A]">{heroDeal.subtitle}</p>
+            <p className="mt-3 text-sm uppercase tracking-[0.2em] text-white/70">{heroDeal.location}</p>
+            <div className="gold-divider mt-6" />
+            <p className="mt-6 text-sm leading-7 text-white/80">{heroDeal.summary}</p>
+            <div className="mt-6 space-y-3">
+              {heroDeal.highlights.map((item) => (
+                <div key={item} className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm">
+                  {item}
+                </div>
+              ))}
+            </div>
+            <a href={company.phoneHref} className="btn-gold mt-6 w-full">
+              {heroDeal.cta}
+            </a>
+          </div>
+
+          <div className="card-white mt-12 grid gap-4 border-[#C9A24A]/20 p-6 md:grid-cols-[1.3fr_1fr_1fr_auto] animate-fade-up stagger-1 lg:col-span-2">
             <input
               type="text"
               placeholder="Search by Tambaram, Guduvanchery, Vandalur..."
@@ -113,7 +141,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <div className="mt-8 grid gap-4 md:grid-cols-3 lg:col-span-2">
             {[
               {
                 title: "Trusted by serious buyers",
@@ -195,7 +223,7 @@ export default function HomePage() {
         <div className="container-shell space-y-8">
           <div>
             <p className="section-subtitle">Featured Properties</p>
-            <h2 className="section-title">High-interest land opportunities in Chennai growth belts</h2>
+            <h2 className="section-title">Featured properties, rentals, and lowest-price opportunities</h2>
             <p className="mt-4 max-w-4xl text-base leading-8 text-[#6B7280]">
               {featuredPropertiesIntro}
             </p>
@@ -210,11 +238,16 @@ export default function HomePage() {
                   loading="lazy"
                 />
                 <div className="p-6">
+                  {property.dealLabel ? (
+                    <span className="inline-flex rounded-full bg-[#C9A24A]/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#C9A24A]">
+                      {property.dealLabel}
+                    </span>
+                  ) : null}
                   <p className="text-sm font-medium text-[#2E7D32]">{property.location}</p>
                   <h3 className="mt-2 text-xl font-semibold text-[#1E3A5F]">{property.title}</h3>
                   <p className="mt-2 text-sm font-semibold text-[#C9A24A]">{property.price}</p>
                   <p className="mt-4 text-sm leading-7 text-[#6B7280]">
-                    {property.benefits[0]}. {property.benefits[1]}. Plot size range: {property.plotSize}.
+                    {property.benefits[0]}. {property.benefits[1]}. Size: {property.sizeLabel}.
                   </p>
                   <p className="mt-3 text-sm leading-7 text-[#6B7280]">
                     Investment potential: {property.investmentPotential}

@@ -33,10 +33,13 @@ export default function ContactPage() {
               <h2 className="text-2xl font-semibold text-[#1E3A5F]">Contact information</h2>
               <div className="mt-5 space-y-3 text-base text-[#6B7280]">
                 <p>
-                  <span className="font-semibold text-[#1E3A5F]">Phone:</span> {company.phone}
+                  <span className="font-semibold text-[#1E3A5F]">Primary phone:</span> {company.phone}
                 </p>
                 <p>
-                  <span className="font-semibold text-[#1E3A5F]">WhatsApp:</span> {company.phone}
+                  <span className="font-semibold text-[#1E3A5F]">Secondary phone:</span> {company.secondaryPhone}
+                </p>
+                <p>
+                  <span className="font-semibold text-[#1E3A5F]">WhatsApp:</span> {company.secondaryPhone}
                 </p>
                 <p>
                   <span className="font-semibold text-[#1E3A5F]">Address:</span> {company.address}
@@ -44,7 +47,10 @@ export default function ContactPage() {
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
                 <a href={company.phoneHref} className="btn-gold">
-                  Call Now
+                  Call {company.phone}
+                </a>
+                <a href={company.secondaryPhoneHref} className="btn-outline">
+                  Call {company.secondaryPhone}
                 </a>
                 <a href={company.whatsappHref} className="btn-outline">
                   WhatsApp Us

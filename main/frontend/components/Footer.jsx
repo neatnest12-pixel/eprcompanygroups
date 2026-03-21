@@ -59,9 +59,9 @@ export default function Footer() {
 
         <div>
           <h4 className="mb-4 font-semibold text-white">Contact</h4>
-          <p className="text-sm text-white/70">Phone: {company.phone}</p>
+          <p className="text-sm text-white/70">Phone: {company.phoneDisplay}</p>
           <a href={company.whatsappHref} className="text-sm text-white/70 hover:text-[#C9A24A]">
-            WhatsApp: {company.phone}
+            WhatsApp: {company.secondaryPhone}
           </a>
           <p className="mt-2 text-sm text-white/70">{company.address}</p>
           <div className="mt-4 flex gap-3 text-sm text-white/70">
