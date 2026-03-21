@@ -102,7 +102,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section-shell bg-white">
+      <section className="section-shell bg-transparent">
         <div className="container-shell space-y-8">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -135,7 +135,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section-shell bg-white">
+      <section className="section-shell bg-transparent">
         <div className="container-shell space-y-8">
           <div>
             <p className="section-subtitle">Popular Locations</p>
