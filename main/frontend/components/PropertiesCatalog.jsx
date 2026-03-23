@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import PropertyCard from "./PropertyCard";
-import { getStoredProperties } from "../lib/propertyStore";
+import { listProperties } from "../lib/api";
+import { mapApiProperty } from "../lib/propertyAdapter";
 
 const categoryOptions = [
   "All Categories",
@@ -46,6 +47,7 @@ function parsePriceToLakh(price) {
 
 export default function PropertiesCatalog() {
   const [allProperties, setAllProperties] = useState([]);
+  const [error, setError] = useState("");
   const [keyword, setKeyword] = useState("");
   const [location, setLocation] = useState("All Locations");
   const [category, setCategory] = useState("All Categories");
@@ -54,14 +56,26 @@ export default function PropertiesCatalog() {
   const [amenities, setAmenities] = useState([]);
 
   useEffect(() => {
-    const syncProperties = () => {
-      setAllProperties(getStoredProperties());
+    let active = true;
+
+    const syncProperties = async () => {
+      try {
+        const data = await listProperties();
+        const mapped = data.map(mapApiProperty);
+        if (!active) return;
+        setAllProperties(mapped);
+        setError("");
+      } catch (err) {
+        if (!active) return;
+        setError(err?.message || "Unable to load properties.");
+        setAllProperties([]);
+      }
     };
 
     syncProperties();
-    window.addEventListener("erp-properties-updated", syncProperties);
-
-    return () => window.removeEventListener("erp-properties-updated", syncProperties);
+    return () => {
+      active = false;
+    };
   }, []);
 
   const locations = useMemo(
@@ -186,6 +200,7 @@ export default function PropertiesCatalog() {
         <p className="text-sm font-semibold text-[#1E3A5F]">
           {filtered.length} properties found
         </p>
+        {error ? <p className="text-sm text-red-600">{error}</p> : null}
         <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {filtered.map((property) => (
             <PropertyCard key={property.id} property={property} />

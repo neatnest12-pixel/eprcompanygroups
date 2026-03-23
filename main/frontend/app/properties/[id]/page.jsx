@@ -1,36 +1,39 @@
 import { notFound } from "next/navigation";
 import ContactForm from "../../../components/ContactForm";
 import { company } from "../../../lib/content";
-import { properties } from "../../../lib/properties";
+import { getPropertyById } from "../../../lib/api";
+import { mapApiProperty } from "../../../lib/propertyAdapter";
 
-export function generateStaticParams() {
-  return properties.map((property) => ({ id: property.id }));
-}
+export const dynamic = "force-dynamic";
 
-export const dynamicParams = false;
+export async function generateMetadata({ params }) {
+  try {
+    const data = await getPropertyById(params.id);
+    if (!data) {
+      return {
+        title: "Property not found | Richman Maker"
+      };
+    }
 
-export function generateMetadata({ params }) {
-  const property = properties.find((item) => item.id === params.id);
-
-  if (!property) {
+    return {
+      title: `${data.title} | ${data.location} | ERP Group Company | Richman Maker`,
+      description: `${data.title} in ${data.location}. ${data.description || ""}`,
+      keywords: `${data.location.split(",")[0]} property, ${data.propertyType || data.category}, land for sale Chennai, Richman Maker`
+    };
+  } catch {
     return {
       title: "Property not found | Richman Maker"
     };
   }
-
-  return {
-    title: `${property.title} | ${property.location} | ERP Group Company | Richman Maker`,
-    description: `${property.title} in ${property.location}. ${property.investmentPotential}`,
-    keywords: `${property.location.split(",")[0]} property, ${property.type}, land for sale Chennai, Richman Maker`
-  };
 }
 
-export default function PropertyDetailPage({ params }) {
-  const property = properties.find((item) => item.id === params.id);
-
-  if (!property) {
+export default async function PropertyDetailPage({ params }) {
+  const data = await getPropertyById(params.id).catch(() => null);
+  if (!data) {
     notFound();
   }
+
+  const property = mapApiProperty(data);
 
   return (
     <section className="container-shell section-shell">
@@ -92,12 +95,17 @@ export default function PropertyDetailPage({ params }) {
                 <a href={company.phoneHref} className="btn-orange w-full">
                   Call {company.phone}
                 </a>
-                <a href={company.whatsappHref} className="btn-outline w-full">
+                <a
+                  href={`https://wa.me/917299007799?text=${encodeURIComponent(
+                    `Hello ERP Group Company,\n\nI am interested in this property.\n\nProperty: ${property.title}\nLocation: ${property.location}\nPrice: ${property.price}\nSize: ${property.sizeLabel}\n\nPlease share more details.`
+                  )}`}
+                  className="btn-outline w-full"
+                >
                   WhatsApp for Site Visit
                 </a>
               </div>
             </div>
-            <ContactForm redirectToWhatsApp />
+            <ContactForm redirectToWhatsApp property={property} title="Property Enquiry" />
           </div>
         </div>
 
@@ -186,8 +194,31 @@ export default function PropertyDetailPage({ params }) {
             </div>
           </div>
 
+          {property.videoUrl ? (
+            <div className="card-white p-8">
+              <h2 className="text-2xl font-semibold text-[#1E3A5F]">8. Video Tour</h2>
+              <div className="mt-5">
+                {property.videoEmbedUrl ? (
+                  <div className="overflow-hidden rounded-2xl">
+                    <iframe
+                      src={property.videoEmbedUrl}
+                      title={`${property.title} video`}
+                      className="h-80 w-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                ) : (
+                  <a href={property.videoUrl} target="_blank" rel="noreferrer" className="btn-outline">
+                    Open Property Video
+                  </a>
+                )}
+              </div>
+            </div>
+          ) : null}
+
           <div className="card-white p-8">
-            <h2 className="text-2xl font-semibold text-[#1E3A5F]">8. Frequently Asked Questions</h2>
+            <h2 className="text-2xl font-semibold text-[#1E3A5F]">9. Frequently Asked Questions</h2>
             <div className="mt-6 space-y-5">
               {property.faq.map((item) => (
                 <div key={item.question} className="surface-soft p-5">
@@ -199,7 +230,7 @@ export default function PropertyDetailPage({ params }) {
           </div>
 
           <div className="card-white p-8">
-            <h2 className="text-2xl font-semibold text-[#1E3A5F]">9. Book Your Site Visit</h2>
+            <h2 className="text-2xl font-semibold text-[#1E3A5F]">10. Book Your Site Visit</h2>
             <p className="mt-5 text-base leading-8 text-[#6B7280]">
               Good plotted opportunities in growth corridors do not stay overlooked for long. If this
               property matches your budget, location preference, and future investment plan, speak

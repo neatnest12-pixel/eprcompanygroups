@@ -1,5 +1,6 @@
 ﻿import Link from "next/link";
-import { properties } from "../lib/properties";
+import { listProperties } from "../lib/api";
+import { mapApiProperty } from "../lib/propertyAdapter";
 import PropertyCard from "../components/PropertyCard";
 
 export const metadata = {
@@ -10,8 +11,7 @@ export const metadata = {
     "ERP Group Company, Richman Maker, Chennai properties, plots in OMR, ECR rentals, land promoters"
 };
 
-const featuredProperties = properties.slice(0, 4);
-const latestProperties = properties.slice(4, 8);
+export const dynamic = "force-dynamic";
 
 const stats = [
   { label: "Property categories", value: "6+" },
@@ -33,7 +33,13 @@ const categories = [
   "Farm lands"
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const data = await listProperties().catch(() => []);
+  const properties = data.map(mapApiProperty);
+  const featuredSet = properties.filter((property) => property.featured);
+  const featuredProperties = (featuredSet.length ? featuredSet : properties).slice(0, 4);
+  const latestProperties = properties.slice(4, 8);
+
   return (
     <>
       <section className="relative overflow-hidden bg-gradient-to-br from-[#0B1C33] via-[#1E3A5F] to-[#0F223A]">
@@ -102,7 +108,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section-shell bg-[#F5F7FA]">
+      <section className="section-shell bg-[#EAF7EE]">
         <div className="container-shell space-y-8">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -135,7 +141,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section-shell bg-[#F5F7FA]">
+      <section className="section-shell bg-[#EAF7EE]">
         <div className="container-shell space-y-8">
           <div>
             <p className="section-subtitle">Popular Locations</p>

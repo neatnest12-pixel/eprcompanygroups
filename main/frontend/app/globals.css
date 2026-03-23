@@ -13,7 +13,7 @@ html {
 }
 
 body {
-  @apply bg-white text-[#1A1A1A] antialiased;
+  @apply bg-[#EAF7EE] text-[#1A1A1A] antialiased;
   font-family: "Poppins", sans-serif;
 }
 

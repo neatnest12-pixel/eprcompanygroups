@@ -1,4 +1,5 @@
-﻿import PropertiesCatalog from "../../components/PropertiesCatalog";
+import Link from "next/link";
+import PropertiesCatalog from "../../components/PropertiesCatalog";
 
 export const metadata = {
   title: "Properties | ERP Group Company | Richman Maker",
@@ -18,6 +19,11 @@ export default function PropertiesPage() {
             Filter by location, category, and budget to shortlist the best plots, flats, and rental
             opportunities. Every listing includes verified details to help you decide faster.
           </p>
+          <div className="mt-6">
+            <Link href="/post-property" className="btn-outline">
+              Post Your Property
+            </Link>
+          </div>
         </div>
         <PropertiesCatalog />
       </div>

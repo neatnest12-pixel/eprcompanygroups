@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { company, featuredPropertiesIntro } from "../lib/content";
-import { getStoredProperties } from "../lib/propertyStore";
+import { listProperties } from "../lib/api";
+import { mapApiProperty } from "../lib/propertyAdapter";
 
 function tagClass(tag) {
   switch (tag) {
@@ -22,19 +23,29 @@ function tagClass(tag) {
 
 export default function FeaturedPropertiesSection() {
   const [featured, setFeatured] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    const syncProperties = () => {
-      const nextFeatured = getStoredProperties()
-        .filter((property) => property.featured)
-        .slice(0, 6);
-      setFeatured(nextFeatured);
+    let active = true;
+
+    const syncProperties = async () => {
+      try {
+        const data = await listProperties();
+        const mapped = data.map(mapApiProperty);
+        const nextFeatured = mapped.filter((property) => property.featured).slice(0, 6);
+        setFeatured(nextFeatured.length ? nextFeatured : mapped.slice(0, 6));
+        setError("");
+      } catch (err) {
+        if (!active) return;
+        setError(err?.message || "Unable to load featured properties.");
+        setFeatured([]);
+      }
     };
 
     syncProperties();
-    window.addEventListener("erp-properties-updated", syncProperties);
-
-    return () => window.removeEventListener("erp-properties-updated", syncProperties);
+    return () => {
+      active = false;
+    };
   }, []);
 
   return (
@@ -47,6 +58,9 @@ export default function FeaturedPropertiesSection() {
             {featuredPropertiesIntro}
           </p>
         </div>
+        {error ? (
+          <div className="card-white p-6 text-sm text-red-600">{error}</div>
+        ) : null}
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {featured.map((property) => (
             <div key={property.id} className="card-white overflow-hidden hover-lift group">

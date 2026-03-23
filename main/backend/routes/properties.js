@@ -6,7 +6,7 @@ const {
   updateProperty,
   deleteProperty
 } = require("../services/propertyService");
-const { requireAdmin } = require("../middleware/auth");
+const { requireAdmin, requireStaffOrAdmin } = require("../middleware/auth");
 const { upload, isCloudinaryConfigured } = require("../middleware/upload");
 
 const router = express.Router();
@@ -22,6 +22,15 @@ function buildPropertyPayload(request) {
         .map((file) => file.path || file.secure_url || file.url)
         .filter(Boolean)
     : [];
+  const bodyImages =
+    typeof request.body.images === "string"
+      ? request.body.images
+          .split(/\n|,/)
+          .map((item) => item.trim())
+          .filter(Boolean)
+      : Array.isArray(request.body.images)
+        ? request.body.images.filter(Boolean)
+        : [];
 
   return {
     title: request.body.title?.trim(),
@@ -39,9 +48,9 @@ function buildPropertyPayload(request) {
     facing: request.body.facing?.trim() || "",
     transactionType: request.body.transactionType?.trim() || "sale",
     contactNumber: request.body.contactNumber?.trim() || "8939427799",
-    featured: request.body.featured === "true",
-    verified: request.body.verified !== "false",
-    hotDeal: request.body.hotDeal === "true",
+    featured: request.body.featured === true || request.body.featured === "true",
+    verified: request.body.verified !== false && request.body.verified !== "false",
+    hotDeal: request.body.hotDeal === true || request.body.hotDeal === "true",
     agentName: request.body.agentName?.trim() || "ERP Group Company",
     agentPhone: request.body.agentPhone?.trim() || request.body.contactNumber?.trim() || "8939427799",
     mapQuery: request.body.mapQuery?.trim() || request.body.location?.trim() || "",
@@ -50,7 +59,7 @@ function buildPropertyPayload(request) {
       .split(",")
       .map((item) => item.trim())
       .filter(Boolean),
-    images
+    images: images.length ? images : bodyImages
   };
 }
 
@@ -81,11 +90,12 @@ router.get("/:id", async (request, response, next) => {
 
 router.post(
   "/",
-  requireAdmin,
+  requireStaffOrAdmin,
   upload.array("images", 10),
   async (request, response, next) => {
     try {
-      if (!isCloudinaryConfigured) {
+      const hasUploads = Array.isArray(request.files) && request.files.length > 0;
+      if (hasUploads && !isCloudinaryConfigured) {
         return response.status(500).json({
           message:
             "Cloudinary is not configured. Set CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET."
@@ -103,7 +113,7 @@ router.post(
 
 router.put(
   "/:id",
-  requireAdmin,
+  requireStaffOrAdmin,
   upload.array("images", 10),
   async (request, response, next) => {
     try {

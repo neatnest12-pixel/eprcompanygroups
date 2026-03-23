@@ -29,6 +29,9 @@ export default function Footer() {
               <Link href="/about" className="hover:text-[#C9A24A]">About</Link>
             </li>
             <li>
+              <Link href="/services" className="hover:text-[#C9A24A]">Services</Link>
+            </li>
+            <li>
               <Link href="/contact" className="hover:text-[#C9A24A]">Contact</Link>
             </li>
           </ul>
@@ -37,10 +40,11 @@ export default function Footer() {
         <div>
           <h4 className="mb-4 font-semibold text-white">Contact</h4>
           <p className="text-sm text-white/70">Phone: {company.phoneDisplay}</p>
-          <a href={company.whatsappHref} className="text-sm text-white/70 hover:text-[#C9A24A]">
-            WhatsApp: {company.secondaryPhone}
-          </a>
           <p className="mt-2 text-sm text-white/70">{company.address}</p>
+          <p className="mt-2 text-sm text-white/70">{company.emails[0]}</p>
+          <a href={company.whatsappHref} className="mt-2 inline-flex text-sm text-white/70 hover:text-[#C9A24A]">
+            WhatsApp: {company.phone}
+          </a>
         </div>
       </div>
       <div className="border-t border-white/10 py-4 text-center text-xs text-white/60">

@@ -7,7 +7,10 @@ main/**/.env.*
 main/**/vite-dev.log
 main/**/output/
 main/**/.playwright-cli/
+main/**/.npmrc
 *.log
 
 .vercel
 dist/
+.npm-cache/
+.vercel-cli/

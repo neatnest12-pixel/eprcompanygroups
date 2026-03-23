@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { loginUser } from "../../lib/api";
 
 export default function LoginPage() {
   const [status, setStatus] = useState({ type: "", message: "" });
@@ -16,24 +17,18 @@ export default function LoginPage() {
     const form = event.currentTarget;
     const formData = new FormData(form);
     const payload = {
-      email: formData.get("email"),
+      username: formData.get("username"),
       password: formData.get("password")
     };
 
     try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data?.message || "Login failed. Please try again.");
-      }
+      const data = await loginUser(payload);
 
       window.localStorage.setItem("erp-admin-auth", JSON.stringify(data));
-      setStatus({ type: "success", message: "Login successful. You can now manage listings." });
+      setStatus({
+        type: "success",
+        message: `Login successful. ${data.user.role === "staff" ? "Staff" : "Admin"} access enabled.`
+      });
       form.reset();
       window.setTimeout(() => {
         router.push("/admin");
@@ -52,20 +47,18 @@ export default function LoginPage() {
     <section className="container-shell section-shell">
       <div className="mx-auto max-w-xl">
         <div className="card-white p-8">
-          <p className="section-subtitle">Admin Login</p>
+          <p className="section-subtitle">Admin / Staff Login</p>
           <h1 className="mt-3 text-3xl font-semibold text-[#1E3A5F]">
             Sign in to manage listings
           </h1>
-          <p className="mt-4 text-sm text-[#6B7280]">
-            Use the admin credentials configured in your server environment.
-          </p>
+          <p className="mt-4 text-sm text-[#6B7280]">Use your username and password to access the dashboard.</p>
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             <input
               className="form-input"
-              placeholder="Email"
-              name="email"
-              type="email"
+              placeholder="Username"
+              name="username"
+              type="text"
               required
             />
             <input

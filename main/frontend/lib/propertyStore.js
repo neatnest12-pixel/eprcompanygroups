@@ -131,6 +131,8 @@ export function getEmptyPropertyForm() {
     price: "",
     sizeLabel: "",
     sqft: "",
+    bedrooms: "",
+    bathrooms: "",
     facing: "",
     useCase: "",
     dealLabel: "",
@@ -142,7 +144,12 @@ export function getEmptyPropertyForm() {
     locationAdvantages: "",
     legalDetails: "",
     pricingBreakdown: "",
-    images: ""
+    images: "",
+    imageFiles: [],
+    videoUrl: "",
+    contactNumber: "7299007799",
+    agentPhone: "7299007799",
+    agentName: "ERP Group Company"
   };
 }
 

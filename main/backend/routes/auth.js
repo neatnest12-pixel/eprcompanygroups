@@ -1,29 +1,58 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const { adminEmail, adminPassword, jwtSecret } = require("../config/env");
+const {
+  adminEmail,
+  adminPassword,
+  adminUsername,
+  staffUsername,
+  staffPassword,
+  jwtSecret
+} = require("../config/env");
 
 const router = express.Router();
 
 router.post("/login", (request, response) => {
-  const { email, password } = request.body || {};
+  const { username, email, password } = request.body || {};
+  const identity = `${username || email || ""}`.trim().toLowerCase();
 
-  if (!adminEmail || !adminPassword || !jwtSecret) {
+  if (!adminPassword || !jwtSecret) {
     return response.status(500).json({
       message:
-        "Admin credentials or JWT secret are missing. Configure the server environment variables first."
+        "Login credentials or JWT secret are missing. Configure the server environment variables first."
     });
   }
 
-  if (email !== adminEmail || password !== adminPassword) {
+  const users = [
+    {
+      username: (adminUsername || "admin").toLowerCase(),
+      email: (adminEmail || "").toLowerCase(),
+      password: adminPassword,
+      role: "admin"
+    },
+    {
+      username: (staffUsername || "staff").toLowerCase(),
+      email: "",
+      password: staffPassword,
+      role: "staff"
+    }
+  ];
+
+  const matchedUser = users.find((user) => {
+    const sameIdentity = identity === user.username || (user.email && identity === user.email);
+    return sameIdentity && password === user.password;
+  });
+
+  if (!matchedUser) {
     return response.status(401).json({
-      message: "Invalid admin email or password."
+      message: "Invalid username or password."
     });
   }
 
   const token = jwt.sign(
     {
-      email: adminEmail,
-      role: "admin"
+      email: matchedUser.email || matchedUser.username,
+      username: matchedUser.username,
+      role: matchedUser.role
     },
     jwtSecret,
     {
@@ -34,8 +63,9 @@ router.post("/login", (request, response) => {
   return response.json({
     token,
     user: {
-      email: adminEmail,
-      role: "admin"
+      email: matchedUser.email || matchedUser.username,
+      username: matchedUser.username,
+      role: matchedUser.role
     }
   });
 });

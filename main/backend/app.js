@@ -3,6 +3,8 @@ const cors = require("cors");
 const { frontendUrl } = require("./config/env");
 const authRoutes = require("./routes/auth");
 const propertyRoutes = require("./routes/properties");
+const enquiryRoutes = require("./routes/enquiries");
+const submissionRoutes = require("./routes/submissions");
 const { errorHandler } = require("./middleware/errorHandler");
 
 const app = express();
@@ -37,6 +39,8 @@ app.get("/api/health", (request, response) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/properties", propertyRoutes);
+app.use("/api/enquiries", enquiryRoutes);
+app.use("/api/submissions", submissionRoutes);
 app.use(errorHandler);
 
 module.exports = app;

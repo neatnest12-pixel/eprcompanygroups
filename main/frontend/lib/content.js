@@ -10,8 +10,20 @@ export const company = {
   secondaryPhoneHref: "tel:+918939427799",
   phoneDisplay: "7299007799 / 8939427799",
   whatsappHref:
-    "https://wa.me/918939427799?text=Hi%2C%20I%27m%20interested%20in%20your%20property%20services",
-  address: "Tambaram, Chennai, Tamil Nadu"
+    "https://wa.me/917299007799?text=Hello%20ERP%20Group%20Company%2C%0A%0AI%20am%20interested%20in%20your%20property%20services.",
+  address:
+    "No.79, 5th Street, Rajeswari Nagar, Kelambakkam, Chennai - 603103, Near Mermaid Resort",
+  emails: [
+    "eprgroupcompanykelambakkam@gmail.com",
+    "eprgroupcompany@gmail.com"
+  ],
+  websitePrimary: "www.eprgroupcompany.in",
+  websiteSecondary: "www.eprgroupcompany.com",
+  websitePrimaryHref: "https://www.eprgroupcompany.in",
+  websiteSecondaryHref: "https://www.eprgroupcompany.com",
+  facebookHref: "#",
+  instagramHref: "#",
+  youtubeHref: "#"
 };
 
 export const heroDeal = {

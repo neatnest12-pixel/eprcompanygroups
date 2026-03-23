@@ -2,6 +2,8 @@ const { randomUUID } = require("crypto");
 const { seedProperties } = require("./seedProperties");
 
 let properties = [];
+let enquiries = [];
+let submissions = [];
 
 function nowIso() {
   return new Date().toISOString();
@@ -33,6 +35,39 @@ function normalizeMemoryProperty(property) {
     amenities: Array.isArray(property.amenities) ? property.amenities : [],
     images: Array.isArray(property.images) ? property.images : [],
     createdAt: property.createdAt || nowIso(),
+    updatedAt: nowIso()
+  };
+}
+
+function normalizeEnquiry(enquiry) {
+  return {
+    id: enquiry.id || randomUUID(),
+    propertyId: enquiry.propertyId || "",
+    propertyTitle: enquiry.propertyTitle || "",
+    location: enquiry.location || "",
+    price: enquiry.price || "",
+    size: enquiry.size || "",
+    name: enquiry.name || "",
+    mobile: enquiry.mobile || "",
+    email: enquiry.email || "",
+    message: enquiry.message || "",
+    status: enquiry.status || "new",
+    createdAt: enquiry.createdAt || nowIso(),
+    updatedAt: nowIso()
+  };
+}
+
+function normalizeSubmission(submission) {
+  return {
+    id: submission.id || randomUUID(),
+    name: submission.name || "",
+    mobile: submission.mobile || "",
+    propertyDetails: submission.propertyDetails || "",
+    location: submission.location || "",
+    videoUrl: submission.videoUrl || "",
+    images: Array.isArray(submission.images) ? submission.images : [],
+    status: submission.status || "pending",
+    createdAt: submission.createdAt || nowIso(),
     updatedAt: nowIso()
   };
 }
@@ -90,10 +125,81 @@ function deleteProperty(id) {
   return existing;
 }
 
+function listEnquiries() {
+  return [...enquiries].sort(
+    (left, right) => new Date(right.createdAt) - new Date(left.createdAt)
+  );
+}
+
+function createEnquiry(payload) {
+  const enquiry = normalizeEnquiry(payload);
+  enquiries.unshift(enquiry);
+  return enquiry;
+}
+
+function updateEnquiry(id, payload) {
+  const existing = enquiries.find((item) => item.id === id);
+  if (!existing) {
+    return null;
+  }
+
+  const nextEnquiry = normalizeEnquiry({
+    ...existing,
+    ...payload,
+    id,
+    createdAt: existing.createdAt
+  });
+
+  enquiries = enquiries.map((item) => (item.id === id ? nextEnquiry : item));
+  return nextEnquiry;
+}
+
+function deleteEnquiry(id) {
+  const existing = enquiries.find((item) => item.id === id) || null;
+  enquiries = enquiries.filter((item) => item.id !== id);
+  return existing;
+}
+
+function listSubmissions() {
+  return [...submissions].sort(
+    (left, right) => new Date(right.createdAt) - new Date(left.createdAt)
+  );
+}
+
+function createSubmission(payload) {
+  const submission = normalizeSubmission(payload);
+  submissions.unshift(submission);
+  return submission;
+}
+
+function updateSubmission(id, payload) {
+  const existing = submissions.find((item) => item.id === id);
+  if (!existing) {
+    return null;
+  }
+
+  const nextSubmission = normalizeSubmission({
+    ...existing,
+    ...payload,
+    id,
+    createdAt: existing.createdAt
+  });
+
+  submissions = submissions.map((item) => (item.id === id ? nextSubmission : item));
+  return nextSubmission;
+}
+
 module.exports = {
   listProperties,
   getPropertyById,
   createProperty,
   updateProperty,
-  deleteProperty
+  deleteProperty,
+  listEnquiries,
+  createEnquiry,
+  updateEnquiry,
+  deleteEnquiry,
+  listSubmissions,
+  createSubmission,
+  updateSubmission
 };

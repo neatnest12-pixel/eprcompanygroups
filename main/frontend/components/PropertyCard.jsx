@@ -21,6 +21,7 @@ function tagClass(tag) {
 
 export default function PropertyCard({ property, variant = "standard" }) {
   const isLarge = variant === "large";
+  const coverImage = property.images?.[0];
 
   return (
     <motion.div
@@ -31,12 +32,18 @@ export default function PropertyCard({ property, variant = "standard" }) {
       className="card-white overflow-hidden hover-lift group"
     >
       <div className={`relative ${isLarge ? "h-64" : "h-52"}`}>
-        <img
-          src={property.images[0]}
-          alt={`${property.title} in ${property.location}`}
-          className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
-          loading="lazy"
-        />
+        {coverImage ? (
+          <img
+            src={coverImage}
+            alt={`${property.title} in ${property.location}`}
+            className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+            loading="lazy"
+          />
+        ) : (
+          <div className="flex h-full items-center justify-center bg-[#F5F7FA] text-sm text-[#6B7280]">
+            Image coming soon
+          </div>
+        )}
         <div className="absolute left-4 top-4 flex flex-wrap gap-2">
           {(property.tags || []).map((tag) => (
             <span
@@ -76,9 +83,9 @@ export default function PropertyCard({ property, variant = "standard" }) {
           </span>
         </div>
         <div className="flex flex-wrap gap-3 pt-1">
-          <button type="button" className="btn-outline">
-            Compare
-          </button>
+          <Link href={`/properties/${property.id}`} className="btn-outline">
+            Enquiry
+          </Link>
           <Link href={`/properties/${property.id}`} className="btn-orange">
             View details
           </Link>
