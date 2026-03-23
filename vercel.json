@@ -1,5 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "nextjs",
-  "rootDirectory": "main/frontend"
+  "version": 2,
+  "builds": [
+    {
+      "src": "main/frontend/next.config.js",
+      "use": "@vercel/next"
+    }
+  ]
 }
